@@ -1,46 +1,57 @@
+import {
+  Calendar,
+  Mail,
+  Database,
+  CreditCard,
+  Cloud,
+  MessageSquare,
+  Globe2,
+  Code2,
+} from "lucide-react";
+import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+
 const integrations = [
-  { name: "Google", icon: "🔵", color: "bg-blue-50" },
-  { name: "Slack", icon: "💬", color: "bg-red-50" },
-  { name: "Pinterest", icon: "📌", color: "bg-rose-50" },
-  { name: "Notion", icon: "⬛", color: "bg-gray-50" },
-  { name: "Facebook", icon: "📘", color: "bg-blue-100" },
-  { name: "Salesforce", icon: "☁️", color: "bg-cyan-50" },
-  { name: "Dribbble", icon: "🏀", color: "bg-pink-50" },
-  { name: "Stripe", icon: "💳", color: "bg-indigo-50" },
+  { name: "Google", Icon: Globe2 },
+  { name: "Slack", Icon: MessageSquare },
+  { name: "Calendar", Icon: Calendar },
+  { name: "Mail", Icon: Mail },
+  { name: "Salesforce", Icon: Cloud },
+  { name: "Stripe", Icon: CreditCard },
+  { name: "Postgres", Icon: Database },
+  { name: "REST API", Icon: Code2 },
 ];
 
-export default function DubCallIntegrations() {
+export default function Integrations() {
   return (
-    <section className="py-24 px-4 bg-gradient-to-br from-blue-50/30 via-orange-50/20 to-purple-50/30">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Integrate with
+    <section className="bg-surface-2 py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal className="text-center">
+          <span className="eyebrow">Integrations</span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
+            Plug into your stack
           </h2>
-        </div>
+          <p className="mt-4 text-fg-muted">
+            Native connectors plus a universal REST + Webhook bridge.
+          </p>
+        </Reveal>
 
-        <div className="relative">
-          <div className="bg-gradient-to-r from-blue-100/40 via-orange-100/30 to-purple-100/40 rounded-3xl p-12 border border-black/5 shadow-xl">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
-              {integrations.map((integration, index) => (
-                <div
-                  key={integration.name}
-                  className={`${integration.color} border-2 border-black/10 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 hover:scale-105 transition-transform duration-300 hover:shadow-lg cursor-pointer group bg-white/80 backdrop-blur-sm`}
-                  style={{
-                    animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
-                  }}
-                >
-                  <div className="text-4xl group-hover:scale-110 transition-transform duration-300">
-                    {integration.icon}
-                  </div>
-                  <span className="text-sm font-semibold text-gray-700">
-                    {integration.name}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        <StaggerGroup className="mx-auto mt-14 grid max-w-4xl grid-cols-2 gap-3 sm:grid-cols-4">
+          {integrations.map(({ name, Icon }) => (
+            <StaggerItem
+              key={name}
+              className="group flex flex-col items-center gap-3 rounded-2xl border border-line bg-bg p-6 transition-all duration-500 ease-apple hover:-translate-y-1 hover:border-fg/20 hover:shadow-soft"
+            >
+              <div className="grid h-12 w-12 place-items-center rounded-xl border border-line transition-colors group-hover:border-fg/30 group-hover:bg-fg group-hover:text-bg">
+                <Icon size={20} strokeWidth={1.8} />
+              </div>
+              <span className="text-sm font-semibold">{name}</span>
+            </StaggerItem>
+          ))}
+        </StaggerGroup>
+
+        <Reveal className="mx-auto mt-10 max-w-md text-center text-xs text-fg-subtle">
+          + custom REST APIs, Webhooks, SIP trunks, and major CRMs (HubSpot, Pipedrive, Zoho).
+        </Reveal>
       </div>
     </section>
   );

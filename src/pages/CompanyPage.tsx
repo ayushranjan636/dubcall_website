@@ -8,13 +8,15 @@ import CompanyAdvisors from "@/components/sections/company/CompanyAdvisors";
 
 export default function CompanyPage() {
   return (
-    <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-fg">
       <Navbar />
-      <CompanyHero />
-      <CompanyVision />
-      <CompanyTeam />
-      <CompanyAdvisors />
-      <CTA />
+      <main className="pt-24">
+        <CompanyHero />
+        <CompanyVision />
+        <CompanyTeam />
+        <CompanyAdvisors />
+        <CTA />
+      </main>
       <Footer />
     </div>
   );

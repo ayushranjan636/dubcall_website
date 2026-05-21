@@ -1,59 +1,38 @@
+import { Target, Repeat, Plug2, LineChart } from "lucide-react";
+import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+
 const features = [
-  {
-    icon: "🎯",
-    title: "Intelligent Routing",
-    description: "Automatically routes calls to the right agent, department, or system based on intent & context.",
-  },
-  {
-    icon: "🔄",
-    title: "Multi-turn Conversations",
-    description: "Handles complex, multi-step conversations with context retention and natural flow.",
-  },
-  {
-    icon: "🔗",
-    title: "Deep Integrations",
-    description: "Connects directly to your CRM, calendar, payment systems, and custom APIs.",
-  },
-  {
-    icon: "📈",
-    title: "Real-time Analytics",
-    description: "Monitor call quality, success rates, customer satisfaction, and AI performance metrics.",
-  },
+  { Icon: Target, title: "Intelligent Routing", description: "Routes calls to the right agent, department, or system based on intent & context." },
+  { Icon: Repeat, title: "Multi-turn Conversations", description: "Handles complex, multi-step flows with context retention." },
+  { Icon: Plug2, title: "Deep Integrations", description: "Connects to CRM, calendar, payments, and custom APIs." },
+  { Icon: LineChart, title: "Real-time Analytics", description: "Monitor call quality, success rates, and AI performance." },
 ];
 
 export default function ProductFeatures() {
   return (
-    <section className="py-24 px-4 bg-white border-t border-black/10">
-      <style>{`
-        @keyframes fadeInUpPF {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Core Features
+    <section className="border-t border-line bg-surface-2 py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal className="text-center">
+          <span className="eyebrow">Core Capabilities</span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] md:text-5xl">
+            Core features
           </h2>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <div
-              key={feature.title}
-              className="border-2 border-black rounded-xl p-6 bg-white shadow-sm hover:shadow-md transition-all duration-300 group"
-              style={{
-                animation: `fadeInUpPF 0.5s ease-out ${index * 0.1}s both`,
-              }}
+        <StaggerGroup className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {features.map(({ Icon, title, description }) => (
+            <StaggerItem
+              key={title}
+              className="card group p-6 transition-all duration-500 ease-apple hover:-translate-y-1 hover:border-fg/20 hover:shadow-soft"
             >
-              <div className="text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
-              <h3 className="text-lg font-bold mb-3">{feature.title}</h3>
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {feature.description}
-              </p>
-            </div>
+              <div className="mb-4 grid h-11 w-11 place-items-center rounded-xl border border-line bg-bg transition-all group-hover:border-fg/30 group-hover:bg-fg group-hover:text-bg">
+                <Icon size={18} />
+              </div>
+              <h3 className="text-base font-semibold">{title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-fg-muted">{description}</p>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );

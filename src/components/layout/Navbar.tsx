@@ -1,136 +1,158 @@
-import { useState } from "react";
-import { useLocation } from "wouter";
+import { useEffect, useState } from "react";
+import { useLocation, Link } from "wouter";
+import { Menu, X, Phone } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 import TalkToUs from "@/components/shared/TalkToUs";
+import ThemeToggle from "@/components/shared/ThemeToggle";
+import { cn } from "@/lib/cn";
+
+const NAV_LINKS = [
+  { href: "/product", label: "Product" },
+  { href: "/pricing", label: "Pricing" },
+  { href: "/company", label: "Company" },
+  { href: "/resources", label: "Resources" },
+];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [talkToUsOpen, setTalkToUsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
 
   const isActive = (href: string) => {
     if (href === "/" && location === "/") return true;
-    if (href !== "/" && location.startsWith(href)) return true;
-    return false;
+    return href !== "/" && location.startsWith(href);
   };
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 px-4">
-      {/* Outer pill container */}
-      <nav className="w-full max-w-4xl bg-white border border-black rounded-2xl px-4 py-2.5 flex items-center justify-between shadow-sm">
+    <header className="fixed inset-x-0 top-0 z-50 flex justify-center px-3 pt-3">
+      <motion.nav
+        initial={false}
+        animate={{
+          maxWidth: scrolled ? 880 : 1080,
+          paddingTop: scrolled ? 6 : 10,
+          paddingBottom: scrolled ? 6 : 10,
+        }}
+        transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        className={cn(
+          "w-full glass flex items-center justify-between rounded-2xl px-4 transition-shadow duration-500",
+          scrolled ? "shadow-soft" : "shadow-none"
+        )}
+      >
+        <div className="flex items-center gap-1">
+          <Link href="/" className="flex items-center gap-2 pr-3">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-fg text-bg shadow-soft">
+              <Phone size={14} strokeWidth={2.5} />
+            </span>
+            <span className="text-base font-semibold tracking-tight">DubCall</span>
+          </Link>
 
-        {/* LEFT: Logo + Nav Links */}
-        <div className="flex items-center gap-3">
-          {/* Logo */}
-          <a href="/" className="flex items-center group pr-2">
-            <img
-              src="/images/dubcall-logo.png"
-              alt="DubCall"
-              width={96}
-              height={96}
-              className="rounded-md object-contain"
-            />
-          </a>
-
-          {/* Desktop Nav Links */}
-          <div className="hidden md:flex items-center gap-2">
-            <a
-              href="/product"
-              className={`text-sm font-medium px-3.5 py-1.5 rounded-lg border transition-colors duration-200 ${
-                isActive("/product")
-                  ? "border-black bg-black text-white"
-                  : "border-black hover:bg-black hover:text-white"
-              }`}
-            >
-              Product
-            </a>
-            <a
-              href="/company"
-              className={`text-sm font-medium px-3.5 py-1.5 rounded-lg border transition-colors duration-200 ${
-                isActive("/company")
-                  ? "border-black bg-black text-white"
-                  : "border-black hover:bg-black hover:text-white"
-              }`}
-            >
-              Company
-            </a>
+          <div className="ml-3 hidden md:flex items-center gap-0.5">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-300",
+                  isActive(link.href)
+                    ? "text-fg"
+                    : "text-fg-muted hover:text-fg"
+                )}
+              >
+                {isActive(link.href) && (
+                  <motion.span
+                    layoutId="nav-pill"
+                    className="absolute inset-0 -z-10 rounded-full bg-fg/10"
+                    transition={{ type: "spring", stiffness: 320, damping: 28 }}
+                  />
+                )}
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
 
-        {/* RIGHT: CTA Buttons */}
         <div className="hidden md:flex items-center gap-2">
-          <a
+          <ThemeToggle />
+          <Link
             href="/contact"
-            className="text-sm font-medium px-3.5 py-1.5 rounded-lg hover:underline underline-offset-4 transition-all"
+            className="rounded-full px-3 py-1.5 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
           >
-            Get Started
-          </a>
+            Sign in
+          </Link>
           <button
             onClick={() => setTalkToUsOpen(true)}
-            className="text-sm font-medium px-3.5 py-1.5 rounded-lg border border-black bg-white hover:bg-black hover:text-white transition-colors duration-200"
+            className="rounded-full bg-fg px-4 py-1.5 text-sm font-semibold text-bg shadow-soft transition-transform duration-300 ease-apple hover:-translate-y-0.5 active:scale-95"
           >
             Talk to us
           </button>
         </div>
 
-        {/* Mobile Hamburger */}
         <button
-          className="md:hidden flex flex-col gap-1.5 p-1"
-          onClick={() => setMenuOpen(!menuOpen)}
+          className="md:hidden flex h-9 w-9 items-center justify-center rounded-full text-fg"
+          onClick={() => setMenuOpen((o) => !o)}
           aria-label="Toggle menu"
         >
-          <span className={`block w-5 h-0.5 bg-black transition-all duration-200 ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-black transition-all duration-200 ${menuOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-5 h-0.5 bg-black transition-all duration-200 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          {menuOpen ? <X size={18} /> : <Menu size={18} />}
         </button>
-      </nav>
+      </motion.nav>
 
-      {/* Mobile Menu */}
-      {menuOpen && (
-        <div className="absolute top-16 left-4 right-4 max-w-4xl mx-auto bg-white border border-black rounded-2xl px-5 py-4 flex flex-col gap-3 shadow-sm md:hidden">
-          <a
-            href="/product"
-            className={`text-sm font-medium px-3.5 py-1.5 rounded-lg border ${
-              isActive("/product")
-                ? "bg-black text-white border-black"
-                : "border-black"
-            }`}
-            onClick={() => setMenuOpen(false)}
+      <AnimatePresence>
+        {menuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="glass absolute left-3 right-3 top-[68px] mx-auto flex max-w-md flex-col gap-1 rounded-2xl p-3 shadow-soft md:hidden"
           >
-            Product
-          </a>
-          <a
-            href="/company"
-            className={`text-sm font-medium px-3.5 py-1.5 rounded-lg border ${
-              isActive("/company")
-                ? "bg-black text-white border-black"
-                : "border-black"
-            }`}
-            onClick={() => setMenuOpen(false)}
-          >
-            Company
-          </a>
-          <div className="flex gap-2 pt-1">
-            <a
-              href="/contact"
-              className="text-sm font-medium px-3.5 py-1.5 rounded-lg border border-black hover:bg-black hover:text-white transition-colors duration-200"
-              onClick={() => setMenuOpen(false)}
-            >
-              Get Started
-            </a>
-            <button
-              onClick={() => {
-                setTalkToUsOpen(true);
-                setMenuOpen(false);
-              }}
-              className="text-sm font-medium px-3.5 py-1.5 rounded-lg border border-black bg-black text-white hover:bg-gray-900 transition-colors duration-200"
-            >
-              Talk to us
-            </button>
-          </div>
-        </div>
-      )}
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "rounded-xl px-3 py-2 text-sm font-medium transition-colors",
+                  isActive(link.href)
+                    ? "bg-fg text-bg"
+                    : "text-fg-muted hover:bg-fg/5 hover:text-fg"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="mt-2 flex items-center gap-2 border-t border-line pt-3">
+              <ThemeToggle />
+              <Link
+                href="/contact"
+                className="flex-1 rounded-full border border-line px-3 py-2 text-center text-sm font-medium"
+              >
+                Sign in
+              </Link>
+              <button
+                onClick={() => {
+                  setTalkToUsOpen(true);
+                  setMenuOpen(false);
+                }}
+                className="flex-1 rounded-full bg-fg px-3 py-2 text-sm font-semibold text-bg"
+              >
+                Talk to us
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      {/* Talk to us modal */}
       <TalkToUs isOpen={talkToUsOpen} onClose={() => setTalkToUsOpen(false)} />
     </header>
   );

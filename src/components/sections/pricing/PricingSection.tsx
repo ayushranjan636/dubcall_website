@@ -1,10 +1,12 @@
 import { useState } from "react";
+import { Check } from "lucide-react";
+import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+import { cn } from "@/lib/cn";
 
 const plans = [
   {
     name: "Starter",
-    price: "$99",
-    period: "/month",
+    price: { monthly: 99, annual: 79 },
     description: "Perfect for small businesses getting started",
     features: [
       "1,000 minutes/month",
@@ -15,12 +17,11 @@ const plans = [
       "Multi-language support",
     ],
     popular: false,
-    cta: "Start Free Trial",
+    cta: "Start free trial",
   },
   {
     name: "Professional",
-    price: "$299",
-    period: "/month",
+    price: { monthly: 299, annual: 239 },
     description: "Best for growing teams and businesses",
     features: [
       "5,000 minutes/month",
@@ -33,12 +34,12 @@ const plans = [
       "Team collaboration",
     ],
     popular: true,
-    cta: "Start Free Trial",
+    cta: "Start free trial",
   },
   {
     name: "Enterprise",
-    price: "Custom",
-    period: "",
+    price: { monthly: 0, annual: 0 },
+    custom: true,
     description: "For large-scale operations",
     features: [
       "Unlimited minutes",
@@ -51,104 +52,104 @@ const plans = [
       "Account manager",
     ],
     popular: false,
-    cta: "Contact Sales",
+    cta: "Contact sales",
   },
 ];
 
 export default function PricingSection() {
-  const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
+  const [cycle, setCycle] = useState<"monthly" | "annual">("monthly");
 
   return (
-    <section className="py-24 px-4 bg-gray-50" id="pricing">
-      <style>{`
-        @keyframes fadeInUpPricing {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-12">
-          {/* Billing Toggle */}
-          <div className="inline-flex items-center gap-3 bg-white border-2 border-black/10 rounded-full p-1">
-            <button
-              onClick={() => setBillingPeriod("monthly")}
-              className={`px-6 py-2 rounded-full font-semibold transition-all ${
-                billingPeriod === "monthly"
-                  ? "bg-black text-white"
-                  : "text-gray-600 hover:text-black"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingPeriod("annual")}
-              className={`px-6 py-2 rounded-full font-semibold transition-all ${
-                billingPeriod === "annual"
-                  ? "bg-black text-white"
-                  : "text-gray-600 hover:text-black"
-              }`}
-            >
-              Annual <span className="text-xs text-green-500 ml-1">-20%</span>
-            </button>
-          </div>
-        </div>
+    <section className="bg-bg py-24" id="pricing">
+      <div className="mx-auto max-w-7xl px-6">
+        <Reveal className="text-center">
+          <span className="eyebrow">Pricing</span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] md:text-6xl">
+            Pricing that scales with you.
+          </h2>
+          <p className="mt-4 text-fg-muted">
+            Start free. Upgrade when you're ready.
+          </p>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-          {plans.map((plan, index) => (
-            <div
+        <Reveal className="mt-10 flex justify-center" delay={0.1}>
+          <div className="inline-flex rounded-full border border-line bg-surface p-1">
+            {(["monthly", "annual"] as const).map((c) => (
+              <button
+                key={c}
+                onClick={() => setCycle(c)}
+                className={cn(
+                  "rounded-full px-5 py-1.5 text-xs font-semibold capitalize transition-colors",
+                  cycle === c ? "bg-fg text-bg" : "text-fg-muted hover:text-fg"
+                )}
+              >
+                {c}
+                {c === "annual" && <span className="ml-1 text-[10px] text-success">-20%</span>}
+              </button>
+            ))}
+          </div>
+        </Reveal>
+
+        <StaggerGroup className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-3">
+          {plans.map((plan) => (
+            <StaggerItem
               key={plan.name}
-              className={`relative rounded-2xl bg-white p-8 transition-all duration-300 hover:-translate-y-2 ${
-                plan.popular
-                  ? "border-4 border-black shadow-2xl scale-105"
-                  : "border-2 border-black/10 shadow-lg"
-              }`}
-              style={{
-                animation: `fadeInUpPricing 0.5s ease-out ${index * 0.1}s both`,
-              }}
+              className={cn(
+                "card relative p-8 transition-all duration-500 ease-apple hover:-translate-y-1",
+                plan.popular ? "border-fg/40 shadow-glow" : ""
+              )}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-1 rounded-full text-sm font-semibold">
-                  Most Popular
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-fg px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-bg">
+                  Most popular
                 </div>
               )}
-
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">{plan.description}</p>
-                <div className="flex items-baseline justify-center gap-1">
-                  <span className="text-5xl font-bold">{plan.price}</span>
-                  {plan.period && <span className="text-gray-600">{plan.period}</span>}
+              <div className="text-center">
+                <h3 className="text-xl font-semibold">{plan.name}</h3>
+                <p className="mt-1.5 text-xs text-fg-muted">{plan.description}</p>
+                <div className="mt-6 flex items-baseline justify-center gap-1">
+                  {plan.custom ? (
+                    <span className="text-4xl font-semibold tracking-tight">Custom</span>
+                  ) : (
+                    <>
+                      <span className="text-4xl font-semibold tracking-tight">
+                        ${plan.price[cycle]}
+                      </span>
+                      <span className="text-sm text-fg-muted">/month</span>
+                    </>
+                  )}
                 </div>
               </div>
-
-              <ul className="space-y-3 mb-8">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm">
-                    <span className="text-green-500 text-lg flex-shrink-0">✓</span>
-                    <span className="text-gray-700">{feature}</span>
+              <ul className="mt-7 space-y-3 border-t border-line pt-7">
+                {plan.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm">
+                    <span className="mt-0.5 grid h-4 w-4 flex-shrink-0 place-items-center rounded-full bg-success/15 text-success">
+                      <Check size={10} strokeWidth={3} />
+                    </span>
+                    <span className="text-fg-muted">{f}</span>
                   </li>
                 ))}
               </ul>
-
               <button
-                className={`w-full py-3 rounded-xl font-semibold transition-all duration-300 ${
+                className={cn(
+                  "mt-7 w-full rounded-full py-2.5 text-sm font-semibold transition-all",
                   plan.popular
-                    ? "bg-black text-white hover:bg-gray-800"
-                    : "border-2 border-black text-black hover:bg-black hover:text-white"
-                }`}
+                    ? "bg-fg text-bg hover:-translate-y-0.5"
+                    : "border border-line text-fg hover:bg-fg/5"
+                )}
               >
                 {plan.cta}
               </button>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
 
-        <p className="text-center text-sm text-gray-600 mt-12">
-          All plans include access to our core features. Need a custom solution?{" "}
-          <a href="/contact" className="text-black font-semibold underline">
+        <Reveal className="mt-12 text-center text-sm text-fg-muted">
+          Need something custom?{" "}
+          <a href="/contact" className="font-semibold text-fg underline">
             Contact us
           </a>
-        </p>
+        </Reveal>
       </div>
     </section>
   );

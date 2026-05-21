@@ -3,42 +3,35 @@ const logos = [
   { name: "SlateMate", image: "/images/SlateMate-logo-2.png" },
   { name: "Franchise Batao", image: "/images/Franchise-batao-logo-newww.jpg" },
   { name: "The HNH", image: "/images/the-hnh-logo-scaled.jpg" },
-  { name: "Rivet Global", image: "/images/rivet-global.png" },
-  { name: "SlateMate", image: "/images/SlateMate-logo-2.png" },
-  { name: "Franchise Batao", image: "/images/Franchise-batao-logo-newww.jpg" },
-  { name: "The HNH", image: "/images/the-hnh-logo-scaled.jpg" },
 ];
 
-export default function DubCallTrustedBy() {
+const trail = [...logos, ...logos, ...logos];
+
+export default function TrustedBy() {
   return (
-    <section className="py-14 bg-white border-y border-black/10">
-      <div className="max-w-6xl mx-auto px-6">
-        {/* Label */}
-        <div className="flex items-center justify-center mb-8">
-          <span className="px-5 py-1.5 text-xs font-semibold tracking-widest uppercase border border-black rounded-full">
-            Trusted By
-          </span>
-        </div>
+    <section className="border-y border-line bg-bg py-14">
+      <div className="mx-auto max-w-6xl px-6">
+        <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.18em] text-fg-subtle">
+          Trusted by teams building the next wave of AI calling
+        </p>
 
-        {/* Marquee wrapper */}
-        <div className="overflow-hidden border border-black/10 rounded-2xl bg-white py-4 relative">
-          {/* Fade masks */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+        <div className="relative overflow-hidden">
+          {/* edge fade masks */}
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-bg to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-bg to-transparent" />
 
-          <div className="flex dc-animate-marquee whitespace-nowrap gap-0">
-            {logos.map((logo, i) => (
+          <div className="dc-animate-marquee flex w-max items-center gap-16 whitespace-nowrap">
+            {trail.map((logo, i) => (
               <div
                 key={i}
-                className="flex items-center mx-12 py-2 min-w-max"
+                className="flex h-20 w-32 items-center justify-center opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0 dark:invert dark:hover:invert-0"
               >
-                <div className="relative w-28 h-28 flex-shrink-0">
-                  <img
-                    src={logo.image}
-                    alt={logo.name}
-                    className="w-28 h-28 object-contain"
-                  />
-                </div>
+                <img
+                  src={logo.image}
+                  alt={logo.name}
+                  className="max-h-full max-w-full object-contain"
+                  loading="lazy"
+                />
               </div>
             ))}
           </div>

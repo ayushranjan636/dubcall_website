@@ -1,89 +1,84 @@
+import { Zap, Bot, ShieldCheck } from "lucide-react";
+import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+import { useCountUp } from "@/lib/useCountUp";
+
 const stats = [
-  {
-    value: "1M+",
-    label: "Calls Capacity",
-    description: "Scalable AI infrastructure built for high-volume operations",
-    shape: "rounded-2xl",
-  },
-  {
-    value: "2X",
-    label: "Lead Conversion Potential",
-    description: "24×7 follow-ups and instant responses increase closure rates",
-    shape: "rounded-full",
-  },
-  {
-    value: "32+",
-    label: "Supported Languages",
-    description: "English, Hindi & regional dialects with code-switching",
-    shape: "rounded-2xl",
-  },
-  {
-    value: "85%+",
-    label: "Task Automation",
-    description: "AI completes workflows — not just conversations",
-    shape: "rounded-full",
-  },
+  { value: 1, suffix: "M+", label: "Calls Capacity", desc: "Scalable AI infrastructure for high-volume operations" },
+  { value: 2, suffix: "×", label: "Lead Conversion", desc: "Instant follow-ups boost closure rates" },
+  { value: 32, suffix: "+", label: "Languages", desc: "English, Hindi & regional dialects with code-switching" },
+  { value: 85, suffix: "%+", label: "Task Automation", desc: "AI completes workflows — not just conversations" },
 ];
 
 const features = [
-  { icon: "⚡", title: "< 1 Day Setup", desc: "Go live without enterprise complexity" },
-  { icon: "🤖", title: "Custom AI Agents", desc: "Built for BFSI, healthcare, real estate & more" },
-  { icon: "🔒", title: "Enterprise Security", desc: "SOC 2 compliant, end-to-end encrypted calls" },
+  { Icon: Zap, title: "< 1 Day Setup", desc: "Go live without enterprise complexity" },
+  { Icon: Bot, title: "Custom AI Agents", desc: "Built for BFSI, healthcare, real estate & more" },
+  { Icon: ShieldCheck, title: "Enterprise Security", desc: "SOC 2 in progress · end-to-end encrypted calls" },
 ];
 
-export default function DubCallStats() {
+function CountUp({ end, suffix }: { end: number; suffix: string }) {
+  const { value, ref } = useCountUp({ end });
   return (
-    <section className="py-20 bg-white" id="product">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid md:grid-cols-2 gap-16 items-start">
-          {/* Left */}
-          <div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight mb-3">
-              Trusted.{" "}
-              <span className="italic">Live.</span>{" "}
-              Delivering Results.
+    <span ref={ref} className="text-4xl font-semibold tracking-tight sm:text-5xl">
+      {value}
+      <span className="text-fg-muted">{suffix}</span>
+    </span>
+  );
+}
+
+export default function Stats() {
+  return (
+    <section className="border-t border-line bg-bg py-24" id="product">
+      <div className="mx-auto max-w-6xl px-6">
+        <div className="grid items-start gap-16 md:grid-cols-2">
+          <Reveal>
+            <span className="eyebrow">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent dc-pulse" />
+              Trusted · Live · Delivering
+            </span>
+            <h2 className="mt-5 text-3xl font-semibold leading-tight tracking-[-0.02em] sm:text-4xl">
+              Built for scale.
+              <br />
+              <span className="text-fg-muted">Designed for action.</span>
             </h2>
-            <p className="text-gray-500 text-sm mb-10 max-w-sm">
-              Built for scale. Designed for action. Proven in production.
+            <p className="mt-3 text-fg-muted">
+              Proven in production for support, lead generation, and sales motions.
             </p>
 
-            <div className="flex flex-col gap-6">
-              {features.map((f, i) => (
-                <div
-                  key={i}
-                  className="flex items-start gap-4 p-4 border border-black/10 rounded-xl hover:border-black transition-colors duration-200 group cursor-default"
+            <StaggerGroup className="mt-10 flex flex-col gap-3">
+              {features.map(({ Icon, title, desc }) => (
+                <StaggerItem
+                  key={title}
+                  className="group flex items-start gap-4 rounded-2xl border border-line bg-surface p-4 transition-colors hover:border-fg/20"
                 >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-xl border border-black/10 flex items-center justify-center text-lg group-hover:bg-black group-hover:border-black transition-colors duration-200">
-                    {f.icon}
+                  <div className="grid h-10 w-10 flex-shrink-0 place-items-center rounded-xl border border-line bg-bg transition-colors group-hover:border-fg/30">
+                    <Icon size={18} strokeWidth={2} />
                   </div>
                   <div>
-                    <p className="font-bold text-sm">{f.title}</p>
-                    <p className="text-gray-500 text-xs mt-0.5">{f.desc}</p>
+                    <p className="text-sm font-semibold">{title}</p>
+                    <p className="mt-0.5 text-xs text-fg-muted">{desc}</p>
                   </div>
-                </div>
+                </StaggerItem>
               ))}
-            </div>
-          </div>
+            </StaggerGroup>
+          </Reveal>
 
-          {/* Right: Stats Grid */}
-          <div className="grid grid-cols-2 gap-4">
+          <StaggerGroup className="grid grid-cols-2 gap-3" step={0.08}>
             {stats.map((s, i) => (
-              <div
-                key={i}
-                className={`border-2 border-black p-6 flex flex-col items-center justify-center text-center gap-2 hover:bg-black hover:text-white transition-all duration-300 group cursor-default ${s.shape}`}
+              <StaggerItem
+                key={s.label}
+                className={`group relative overflow-hidden rounded-3xl border border-line bg-surface p-6 transition-all hover:border-fg/20 hover:shadow-soft ${
+                  i % 3 === 0 ? "sm:col-span-1" : ""
+                }`}
               >
-                <span className="text-4xl sm:text-5xl font-extrabold tracking-tight dc-count-pulse">
-                  {s.value}
-                </span>
-                <span className="text-xs font-bold uppercase tracking-wider">
+                <div className="absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-accent/40 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                <CountUp end={s.value} suffix={s.suffix} />
+                <div className="mt-3 text-xs font-semibold uppercase tracking-wider">
                   {s.label}
-                </span>
-                <span className="text-[11px] text-gray-500 group-hover:text-gray-300 leading-snug max-w-[140px]">
-                  {s.description}
-                </span>
-              </div>
+                </div>
+                <div className="mt-1.5 text-xs leading-snug text-fg-muted">{s.desc}</div>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerGroup>
         </div>
       </div>
     </section>

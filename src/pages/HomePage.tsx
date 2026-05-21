@@ -12,17 +12,19 @@ import CTA from "@/components/shared/CTA";
 
 export default function HomePage() {
   return (
-    <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-fg">
       <Navbar />
-      <Hero />
-      <TrustedBy />
-      <Stats />
-      <AgentStudio />
-      <UseCase />
-      <Features />
-      <Testimonials />
-      <Integrations />
-      <CTA />
+      <main>
+        <Hero />
+        <TrustedBy />
+        <Stats />
+        <AgentStudio />
+        <Features />
+        <UseCase />
+        <Integrations />
+        <Testimonials />
+        <CTA />
+      </main>
       <Footer />
     </div>
   );

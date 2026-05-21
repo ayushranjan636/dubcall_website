@@ -12,17 +12,19 @@ import ProductCTA from "@/components/sections/product/ProductCTA";
 
 export default function ProductPage() {
   return (
-    <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-fg">
       <Navbar />
-      <ProductHero />
-      <ProductFlow />
-      <ProductFeatures />
-      <ProductPricing />
-      <TrustSection />
-      <EnterpriseSection />
-      <AddOnsSection />
-      <ProductFAQ />
-      <ProductCTA />
+      <main className="pt-24">
+        <ProductHero />
+        <ProductFlow />
+        <ProductFeatures />
+        <ProductPricing />
+        <TrustSection />
+        <EnterpriseSection />
+        <AddOnsSection />
+        <ProductFAQ />
+        <ProductCTA />
+      </main>
       <Footer />
     </div>
   );

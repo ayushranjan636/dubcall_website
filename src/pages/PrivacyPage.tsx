@@ -1,97 +1,81 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Reveal } from "@/lib/motion";
+
+const sections = [
+  {
+    title: "1. Information We Collect",
+    body: "DubCall (operated by NextSens Global Pvt. Ltd.) collects information you provide directly to us, such as when you create an account, use our services, or contact us for support. This includes name, email address, company name, and usage data.",
+  },
+  {
+    title: "2. How We Use Your Information",
+    bullets: [
+      "Provide, maintain, and improve our services",
+      "Process transactions and send related information",
+      "Send technical notices, updates, and support messages",
+      "Respond to your comments and questions",
+      "Monitor and analyze trends and usage",
+    ],
+  },
+  {
+    title: "3. Data Security",
+    body: "We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction. All data is encrypted in transit and at rest.",
+  },
+  {
+    title: "4. Voice Call Data",
+    body: "Voice recordings and transcripts generated through our platform are processed to provide our services. Call data is retained according to your plan's data retention policy and never shared with third parties without your explicit consent.",
+  },
+  {
+    title: "5. Cookies",
+    body: "We use cookies and similar tracking technologies to track activity on our service. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.",
+  },
+  {
+    title: "6. Third-Party Services",
+    body: "Our service integrates with third-party services such as Twilio, ElevenLabs, and OpenAI to enable voice functionality. These services have their own privacy policies governing the use of your information.",
+  },
+  {
+    title: "7. Your Rights",
+    body: "You have the right to access, update, or delete your personal information at any time. To exercise these rights, contact us at support@dubcall.com.",
+  },
+  {
+    title: "8. Contact Us",
+    body: "If you have questions about this Privacy Policy, please contact us at support@dubcall.com.",
+  },
+];
 
 export default function PrivacyPage() {
   return (
-    <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-fg">
       <Navbar />
-
-      <section className="py-16 md:py-24 px-4">
-        <div className="max-w-3xl mx-auto">
-          <div className="mb-8">
-            <div className="inline-flex items-center gap-2 border border-black rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase bg-white mb-6">
-              <span className="w-2 h-2 rounded-full bg-black" />
-              Legal
-            </div>
-            <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
+      <main className="pt-32 pb-24">
+        <div className="mx-auto max-w-3xl px-6">
+          <Reveal>
+            <span className="eyebrow">Legal</span>
+            <h1 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-5xl">
               Privacy Policy
             </h1>
-            <p className="text-gray-500 text-sm">Last updated: January 2025</p>
-          </div>
+            <p className="mt-3 text-sm text-fg-subtle">Last updated: January 2025</p>
+          </Reveal>
 
-          <div className="prose prose-gray max-w-none space-y-8 text-gray-700 leading-relaxed">
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">1. Information We Collect</h2>
-              <p>
-                DubCall (operated by NextSens Global Pvt. Ltd.) collects information you provide directly to us, such as when you create an account, use our services, or contact us for support. This includes name, email address, company name, and usage data.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">2. How We Use Your Information</h2>
-              <p>We use the information we collect to:</p>
-              <ul className="list-disc pl-6 space-y-2 mt-3">
-                <li>Provide, maintain, and improve our services</li>
-                <li>Process transactions and send related information</li>
-                <li>Send technical notices, updates, and support messages</li>
-                <li>Respond to your comments and questions</li>
-                <li>Monitor and analyze trends and usage</li>
-              </ul>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">3. Data Security</h2>
-              <p>
-                We take reasonable measures to help protect information about you from loss, theft, misuse and unauthorized access, disclosure, alteration and destruction. All data is encrypted in transit and at rest.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">4. Voice Call Data</h2>
-              <p>
-                Voice recordings and transcripts generated through our platform are processed to provide our services. Call data is retained according to your plan's data retention policy and never shared with third parties without your explicit consent.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">5. Cookies</h2>
-              <p>
-                We use cookies and similar tracking technologies to track activity on our service. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">6. Third-Party Services</h2>
-              <p>
-                Our service integrates with third-party services such as Twilio, ElevenLabs, and OpenAI to enable voice functionality. These services have their own privacy policies governing the use of your information.
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">7. Your Rights</h2>
-              <p>
-                You have the right to access, update, or delete your personal information at any time. To exercise these rights, contact us at{" "}
-                <a href="mailto:support@dubcall.com" className="text-black font-semibold underline">
-                  support@dubcall.com
-                </a>
-                .
-              </p>
-            </section>
-
-            <section>
-              <h2 className="text-2xl font-bold text-black mb-4">8. Contact Us</h2>
-              <p>
-                If you have questions about this Privacy Policy, please contact us at{" "}
-                <a href="mailto:support@dubcall.com" className="text-black font-semibold underline">
-                  support@dubcall.com
-                </a>
-                .
-              </p>
-            </section>
+          <div className="mt-12 space-y-10">
+            {sections.map((s) => (
+              <Reveal key={s.title}>
+                <h2 className="text-xl font-semibold tracking-tight">{s.title}</h2>
+                {s.body && (
+                  <p className="mt-3 leading-relaxed text-fg-muted">{s.body}</p>
+                )}
+                {s.bullets && (
+                  <ul className="mt-3 list-inside list-disc space-y-2 text-fg-muted">
+                    {s.bullets.map((b) => (
+                      <li key={b}>{b}</li>
+                    ))}
+                  </ul>
+                )}
+              </Reveal>
+            ))}
           </div>
         </div>
-      </section>
-
+      </main>
       <Footer />
     </div>
   );

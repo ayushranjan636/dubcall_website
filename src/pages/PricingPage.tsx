@@ -4,9 +4,11 @@ import PricingSection from "@/components/sections/pricing/PricingSection";
 
 export default function PricingPage() {
   return (
-    <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-fg">
       <Navbar />
-      <PricingSection />
+      <main className="pt-24">
+        <PricingSection />
+      </main>
       <Footer />
     </div>
   );

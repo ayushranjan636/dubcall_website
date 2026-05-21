@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { Check } from "lucide-react";
+import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+import { cn } from "@/lib/cn";
 
-const pricingPlans = [
+const plans = [
   {
     name: "Starter",
     subtitle: "For Small Teams",
@@ -17,7 +20,6 @@ const pricingPlans = [
       "Email Support",
     ],
     cta: "Start Free Trial",
-    ctaStyle: "border-black text-black hover:bg-black hover:text-white",
     popular: false,
   },
   {
@@ -36,7 +38,6 @@ const pricingPlans = [
       "Priority Support",
     ],
     cta: "Get Started",
-    ctaStyle: "border-black bg-black text-white hover:bg-white hover:text-black",
     popular: true,
   },
   {
@@ -44,7 +45,7 @@ const pricingPlans = [
     subtitle: "For Enterprises",
     price: "Custom",
     period: "",
-    description: "Best for large scale operations",
+    description: "Best for large-scale operations",
     features: [
       "Unlimited AI Voice Agents",
       "Unlimited Campaigns",
@@ -55,7 +56,6 @@ const pricingPlans = [
       "24/7 Dedicated Support",
     ],
     cta: "Contact Sales",
-    ctaStyle: "border-black text-black hover:bg-black hover:text-white",
     popular: false,
   },
 ];
@@ -68,140 +68,115 @@ const creditPacks = [
 ];
 
 export default function ProductPricing() {
-  const [billingCycle, setBillingCycle] = useState("monthly");
+  const [cycle, setCycle] = useState<"monthly" | "yearly">("monthly");
 
   return (
-    <section className="py-24 px-4 bg-white">
-      <style>{`
-        @keyframes fadeInUpPP {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-      `}</style>
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 italic">
-            Simple, Transparent Pricing
+    <section className="bg-bg py-24">
+      <div className="mx-auto max-w-7xl px-6">
+        <Reveal className="text-center">
+          <span className="eyebrow">Pricing</span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] md:text-5xl">
+            Simple, transparent pricing.
           </h2>
-          <p className="text-lg text-gray-700 mb-2">
-            Start Free. Scale as You Grow.
-          </p>
-          <p className="text-sm text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="mt-4 text-fg-muted">
             Flat monthly platform fee + usage-based credits. No hidden costs.
           </p>
-        </div>
+        </Reveal>
 
-        {/* Billing Toggle */}
-        <div className="flex justify-center mb-12">
-          <div className="inline-flex border-2 border-black rounded-full p-1 bg-white">
-            <button
-              onClick={() => setBillingCycle("monthly")}
-              className={`px-6 py-2 rounded-full font-semibold text-sm transition-all ${
-                billingCycle === "monthly"
-                  ? "bg-black text-white"
-                  : "text-black hover:text-gray-600"
-              }`}
-            >
-              Monthly
-            </button>
-            <button
-              onClick={() => setBillingCycle("yearly")}
-              className={`px-6 py-2 rounded-full font-semibold text-sm transition-all ${
-                billingCycle === "yearly"
-                  ? "bg-black text-white"
-                  : "text-black hover:text-gray-600"
-              }`}
-            >
-              Yearly <span className="text-xs text-green-600 ml-1">Save 20%</span>
-            </button>
+        <Reveal className="mt-10 flex justify-center" delay={0.1}>
+          <div className="inline-flex rounded-full border border-line bg-surface p-1">
+            {(["monthly", "yearly"] as const).map((c) => (
+              <button
+                key={c}
+                onClick={() => setCycle(c)}
+                className={cn(
+                  "rounded-full px-5 py-1.5 text-xs font-semibold capitalize transition-colors",
+                  cycle === c ? "bg-fg text-bg" : "text-fg-muted hover:text-fg"
+                )}
+              >
+                {c}
+                {c === "yearly" && (
+                  <span className="ml-1 text-[10px] text-success">save 20%</span>
+                )}
+              </button>
+            ))}
           </div>
-        </div>
+        </Reveal>
 
-        {/* Pricing Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
-          {pricingPlans.map((plan, index) => (
-            <div
+        <StaggerGroup className="mt-12 grid gap-5 md:grid-cols-3">
+          {plans.map((plan) => (
+            <StaggerItem
               key={plan.name}
-              className={`border-2 border-black rounded-2xl p-8 transition-all duration-300 relative ${
-                plan.popular
-                  ? "shadow-[12px_14px_0px_0px_rgba(0,0,0,0.12)] scale-105 bg-white"
-                  : "shadow-[8px_10px_0px_0px_rgba(0,0,0,0.08)] bg-white hover:-translate-y-1"
-              }`}
-              style={{
-                animation: `fadeInUpPP 0.5s ease-out ${index * 0.1}s both`,
-              }}
+              className={cn(
+                "card relative p-8 transition-all duration-500 ease-apple hover:-translate-y-1",
+                plan.popular ? "border-fg/40 shadow-glow" : ""
+              )}
             >
               {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-black text-white px-4 py-1 rounded-full text-xs font-bold uppercase">
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-fg px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-bg">
                   Most Popular
                 </div>
               )}
-
-              <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold mb-1">{plan.name}</h3>
-                <p className="text-sm text-gray-600 mb-4">{plan.subtitle}</p>
-                <div className="flex items-baseline justify-center gap-1 mb-2">
-                  <span className="text-4xl font-bold">{plan.price}</span>
-                  {plan.period && <span className="text-gray-600 text-sm">{plan.period}</span>}
+              <div className="text-center">
+                <h3 className="text-xl font-semibold">{plan.name}</h3>
+                <p className="mt-1 text-xs text-fg-subtle">{plan.subtitle}</p>
+                <div className="mt-5 flex items-baseline justify-center gap-1">
+                  <span className="text-4xl font-semibold tracking-tight">{plan.price}</span>
+                  {plan.period && <span className="text-sm text-fg-muted">{plan.period}</span>}
                 </div>
-                <p className="text-xs text-gray-600 mb-4">{plan.description}</p>
+                <p className="mt-2 text-xs text-fg-muted">{plan.description}</p>
               </div>
-
-              <div className="border-t border-black/20 pt-6 mb-6">
-                <ul className="space-y-3">
-                  {plan.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-3 text-sm">
-                      <span className="text-base font-bold mt-0.5">✓</span>
-                      <span className="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
+              <ul className="mt-7 space-y-3 border-t border-line pt-7">
+                {plan.features.map((f) => (
+                  <li key={f} className="flex items-start gap-2.5 text-sm">
+                    <span className="mt-0.5 grid h-4 w-4 flex-shrink-0 place-items-center rounded-full bg-success/15 text-success">
+                      <Check size={10} strokeWidth={3} />
+                    </span>
+                    <span className="text-fg-muted">{f}</span>
+                  </li>
+                ))}
+              </ul>
               <button
-                className={`w-full py-3 rounded-lg border-2 font-bold text-sm transition-all duration-200 ${plan.ctaStyle}`}
+                className={cn(
+                  "mt-7 w-full rounded-full py-2.5 text-sm font-semibold transition-all",
+                  plan.popular
+                    ? "bg-fg text-bg hover:-translate-y-0.5"
+                    : "border border-line text-fg hover:bg-fg/5"
+                )}
               >
                 {plan.cta}
               </button>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
 
-        {/* Value Proposition */}
-        <div className="text-center mb-16 border-t border-black/20 pt-12">
-          <p className="text-lg font-semibold text-gray-800">
+        <Reveal className="mt-20 border-t border-line pt-12 text-center">
+          <p className="text-base font-medium">
             You only pay more when your AI does more work.
           </p>
-        </div>
+        </Reveal>
 
-        {/* Credit Packs Table */}
-        <div className="border-2 border-black rounded-2xl overflow-hidden shadow-[8px_10px_0px_0px_rgba(0,0,0,0.08)]">
-          <div className="bg-black text-white">
-            <div className="grid grid-cols-4 gap-4 p-6 font-bold text-sm">
-              <div>Tier</div>
-              <div>Credits</div>
-              <div>Price</div>
-              <div>Cost Per Credit</div>
+        <Reveal className="card mt-10 overflow-hidden">
+          <div className="grid grid-cols-4 gap-4 border-b border-line bg-fg p-5 text-xs font-bold uppercase tracking-wider text-bg">
+            <div>Tier</div>
+            <div>Credits</div>
+            <div>Price</div>
+            <div>Cost / credit</div>
+          </div>
+          {creditPacks.map((p) => (
+            <div
+              key={p.tier}
+              className="grid grid-cols-4 items-center gap-4 border-b border-line px-5 py-4 text-sm last:border-b-0 transition-colors hover:bg-surface-2"
+            >
+              <div className="font-semibold">{p.tier}</div>
+              <div className="text-fg-muted">{p.credits.toLocaleString()}</div>
+              <div className="font-semibold">{p.price}</div>
+              <div className="text-xs text-fg-muted">{p.costPerCredit} /min</div>
             </div>
-          </div>
+          ))}
+        </Reveal>
 
-          <div className="divide-y divide-black/20">
-            {creditPacks.map((pack) => (
-              <div
-                key={pack.tier}
-                className="grid grid-cols-4 gap-4 p-6 text-sm hover:bg-gray-50 transition-colors"
-              >
-                <div className="font-semibold">{pack.tier}</div>
-                <div className="text-gray-700">{pack.credits.toLocaleString()}</div>
-                <div className="font-bold">{pack.price}</div>
-                <div className="text-gray-700 text-xs">{pack.costPerCredit} /min</div>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <p className="text-center text-xs text-gray-600 mt-6">
+        <p className="mt-6 text-center text-xs text-fg-subtle">
           Volume discounts automatically applied as you scale.
         </p>
       </div>

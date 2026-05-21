@@ -1,80 +1,80 @@
+import {
+  MessageCircle,
+  Globe2,
+  BarChart3,
+  Plug,
+  Mic,
+  Clock,
+} from "lucide-react";
+import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+
 const features = [
   {
-    title: "Natural Conversations",
-    description:
-      "Advanced AI that understands context and responds naturally, making every interaction feel human.",
-    icon: "💬",
-    color: "bg-blue-50",
+    Icon: Mic,
+    title: "Natural conversations",
+    desc: "Ultra-low-latency voice with emotion, interruption, and contextual memory.",
+    big: true,
   },
   {
-    title: "Multi-Language Support",
-    description:
-      "Communicate with customers in their preferred language with support for 50+ languages.",
-    icon: "🌍",
-    color: "bg-green-50",
+    Icon: Globe2,
+    title: "32+ languages",
+    desc: "English, Hindi, regional dialects with seamless code-switching.",
   },
   {
-    title: "Real-time Analytics",
-    description:
-      "Track call performance, sentiment analysis, and conversion rates in real-time dashboards.",
-    icon: "📊",
-    color: "bg-purple-50",
+    Icon: BarChart3,
+    title: "Real-time analytics",
+    desc: "Sentiment, intent, and conversion in live dashboards.",
   },
   {
-    title: "Smart Integrations",
-    description:
-      "Seamlessly connect with your CRM, calendar, and business tools for automated workflows.",
-    icon: "🔗",
-    color: "bg-orange-50",
+    Icon: Plug,
+    title: "Smart integrations",
+    desc: "CRM, calendar, helpdesk, any REST API — synced in real time.",
   },
   {
-    title: "Custom Voice Agents",
-    description:
-      "Train AI agents with your brand voice, scripts, and business-specific knowledge.",
-    icon: "🎯",
-    color: "bg-pink-50",
+    Icon: MessageCircle,
+    title: "Custom voice agents",
+    desc: "Train with your brand voice, scripts, and knowledge base.",
   },
   {
-    title: "24/7 Availability",
-    description:
-      "Never miss a call. Your AI agents work around the clock to handle customer inquiries.",
-    icon: "⏰",
-    color: "bg-yellow-50",
+    Icon: Clock,
+    title: "24/7 availability",
+    desc: "Never miss a call. Agents work around the clock.",
   },
 ];
 
-export default function DubCallFeatures() {
+export default function Features() {
   return (
-    <section className="py-24 px-4 bg-white" id="features">
-      <div className="max-w-6xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Powerful Features
+    <section className="bg-bg py-24" id="features">
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow">Capabilities</span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] sm:text-5xl">
+            Everything an agent needs.
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Everything you need to automate and scale your voice communications
+          <p className="mt-4 text-lg text-fg-muted">
+            One platform for voice, reasoning, actions, and analytics.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={feature.title}
-              className="border-2 border-black/10 rounded-2xl p-8 hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white group"
-              style={{
-                animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`,
-              }}
+        <StaggerGroup className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {features.map(({ Icon, title, desc, big }) => (
+            <StaggerItem
+              key={title}
+              className={`group relative overflow-hidden rounded-3xl border border-line bg-surface p-6 transition-all duration-500 ease-apple hover:-translate-y-1 hover:border-fg/20 hover:shadow-soft ${
+                big ? "lg:col-span-2 lg:row-span-1" : ""
+              }`}
             >
-              <div
-                className={`${feature.color} w-16 h-16 rounded-xl flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform duration-300`}
-              >
-                {feature.icon}
+              <div className="absolute -right-16 -top-16 h-40 w-40 rounded-full bg-accent/10 opacity-0 blur-3xl transition-opacity duration-500 group-hover:opacity-100" />
+              <div className="relative">
+                <div className="mb-5 grid h-11 w-11 place-items-center rounded-xl border border-line bg-bg text-fg transition-all group-hover:border-fg/30 group-hover:bg-fg group-hover:text-bg">
+                  <Icon size={18} strokeWidth={2} />
+                </div>
+                <h3 className="text-base font-semibold tracking-tight">{title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-fg-muted">{desc}</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-              <p className="text-gray-600 leading-relaxed">{feature.description}</p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerGroup>
       </div>
     </section>
   );

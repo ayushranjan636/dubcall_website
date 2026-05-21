@@ -1,10 +1,12 @@
+import { ArrowRight, BookOpen, FileText, Scale, Shield } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
 
 const resources = [
   {
+    Icon: FileText,
     category: "Blog",
-    icon: "📝",
     description: "Insights on AI voice automation, industry trends, and best practices.",
     href: "/contact",
     items: [
@@ -14,8 +16,8 @@ const resources = [
     ],
   },
   {
+    Icon: BookOpen,
     category: "Guides",
-    icon: "📖",
     description: "Step-by-step guides to help you get the most out of DubCall.",
     href: "/contact",
     items: [
@@ -25,8 +27,8 @@ const resources = [
     ],
   },
   {
+    Icon: Shield,
     category: "Industry Policies",
-    icon: "🏛️",
     description: "Compliance and regulatory information for various industries.",
     href: "/contact",
     items: [
@@ -36,97 +38,91 @@ const resources = [
     ],
   },
   {
-    category: "Terms of Service",
-    icon: "📋",
-    description: "Legal terms and conditions governing the use of DubCall services.",
+    Icon: Scale,
+    category: "Terms",
+    description: "Legal terms governing the use of DubCall services.",
     href: "/privacy",
-    items: [
-      "Terms of Service",
-      "Acceptable Use Policy",
-      "Data Processing Agreement",
-    ],
+    items: ["Terms of Service", "Acceptable Use Policy", "Data Processing Agreement"],
   },
 ];
 
 export default function ResourcesPage() {
   return (
-    <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-fg">
       <Navbar />
-
-      {/* Hero */}
-      <section className="py-24 px-4 bg-white text-center relative overflow-hidden">
-        <div
-          className="absolute inset-0 opacity-[0.035] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <div className="max-w-3xl mx-auto relative z-10">
-          <div className="mb-6 inline-flex items-center gap-2 border border-black rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase bg-white">
-            <span className="w-2 h-2 rounded-full bg-black animate-pulse" />
-            Resources
-          </div>
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-6">
-            Resources & Guides
-          </h1>
-          <p className="text-lg text-gray-600 leading-relaxed">
-            Everything you need to succeed with DubCall — from getting started guides to industry compliance resources.
-          </p>
-        </div>
-      </section>
-
-      {/* Resources Grid */}
-      <section className="py-16 px-4 bg-gray-50 border-t border-black/10">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {resources.map((resource) => (
-              <div
-                key={resource.category}
-                className="border-2 border-black rounded-2xl p-8 bg-white shadow-[8px_10px_0px_0px_rgba(0,0,0,0.08)] hover:shadow-[12px_14px_0px_0px_rgba(0,0,0,0.12)] transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="flex items-center gap-3 mb-4">
-                  <span className="text-3xl">{resource.icon}</span>
-                  <h2 className="text-2xl font-bold">{resource.category}</h2>
-                </div>
-                <p className="text-gray-600 mb-6 text-sm leading-relaxed">{resource.description}</p>
-                <ul className="space-y-3 mb-6">
-                  {resource.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-sm text-gray-700">
-                      <span className="mt-0.5 text-black font-bold">→</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-                <a
-                  href={resource.href}
-                  className="inline-block px-6 py-2.5 border-2 border-black rounded-lg font-semibold text-sm hover:bg-black hover:text-white transition-colors duration-200"
-                >
-                  Browse {resource.category}
-                </a>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 px-4 bg-white border-t border-black/10 text-center">
-        <div className="max-w-2xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Can't find what you need?</h2>
-          <p className="text-gray-600 mb-8">
-            Our support team is here to help. Reach out and we'll respond within 24 hours.
-          </p>
-          <a
-            href="/contact"
-            className="inline-block px-8 py-3 bg-black text-white border-2 border-black rounded-lg font-bold hover:bg-white hover:text-black transition-colors duration-200"
+      <main className="pt-24">
+        <section className="relative overflow-hidden py-24">
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
           >
-            Contact Support
-          </a>
-        </div>
-      </section>
+            <div className="absolute left-1/2 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px] dc-mesh-blob-1" />
+          </div>
 
+          <Reveal className="mx-auto max-w-3xl px-6 text-center">
+            <span className="eyebrow">Resources</span>
+            <h1 className="mt-5 text-4xl font-semibold tracking-[-0.02em] md:text-6xl">
+              Everything you need to succeed.
+            </h1>
+            <p className="mx-auto mt-5 max-w-xl text-fg-muted">
+              From getting-started guides to industry compliance — built to help
+              you scale voice automation.
+            </p>
+          </Reveal>
+        </section>
+
+        <section className="border-t border-line bg-surface-2 py-16">
+          <div className="mx-auto max-w-5xl px-6">
+            <StaggerGroup className="grid gap-5 md:grid-cols-2">
+              {resources.map(({ Icon, category, description, href, items }) => (
+                <StaggerItem
+                  key={category}
+                  className="card group flex flex-col gap-5 p-8 transition-all duration-500 ease-apple hover:-translate-y-1 hover:border-fg/20 hover:shadow-soft"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="grid h-11 w-11 place-items-center rounded-xl border border-line bg-bg text-fg transition-colors group-hover:bg-fg group-hover:text-bg">
+                      <Icon size={18} />
+                    </div>
+                    <h2 className="text-xl font-semibold">{category}</h2>
+                  </div>
+                  <p className="text-sm leading-relaxed text-fg-muted">{description}</p>
+                  <ul className="flex flex-col gap-2.5 border-t border-line pt-4">
+                    {items.map((item) => (
+                      <li
+                        key={item}
+                        className="flex items-start gap-2 text-sm text-fg-muted"
+                      >
+                        <span className="mt-1 text-fg">→</span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                  <a
+                    href={href}
+                    className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-fg transition-all group-hover:gap-2.5"
+                  >
+                    Browse {category} <ArrowRight size={14} />
+                  </a>
+                </StaggerItem>
+              ))}
+            </StaggerGroup>
+          </div>
+        </section>
+
+        <section className="py-16">
+          <Reveal className="mx-auto max-w-2xl px-6 text-center">
+            <h2 className="text-3xl font-semibold tracking-tight">
+              Can't find what you need?
+            </h2>
+            <p className="mt-3 text-fg-muted">
+              Our support team is here to help. We respond within 24 hours.
+            </p>
+            <a href="/contact" className="btn-primary mt-7 inline-flex">
+              Contact support <ArrowRight size={16} />
+            </a>
+          </Reveal>
+        </section>
+      </main>
       <Footer />
     </div>
   );

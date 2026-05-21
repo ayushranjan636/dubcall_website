@@ -4,11 +4,17 @@ import TalkToUsForm from "@/components/shared/TalkToUsForm";
 
 export default function ContactPage() {
   return (
-    <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
+    <div className="min-h-screen bg-bg text-fg">
       <Navbar />
-      <section className="pt-32 pb-24 px-4">
+      <main className="relative pt-36 pb-24">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        >
+          <div className="absolute left-1/2 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-accent/10 blur-[120px] dc-mesh-blob-1" />
+        </div>
         <TalkToUsForm />
-      </section>
+      </main>
       <Footer />
     </div>
   );

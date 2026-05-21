@@ -1,5 +1,6 @@
 import { useEffect, Suspense, lazy } from "react";
 import { Switch, Route, useLocation } from "wouter";
+import { AnimatePresence, motion } from "framer-motion";
 
 const HomePage = lazy(() => import("@/pages/HomePage"));
 const CompanyPage = lazy(() => import("@/pages/CompanyPage"));
@@ -11,38 +12,56 @@ const ResourcesPage = lazy(() => import("@/pages/ResourcesPage"));
 
 function PageLoader() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-white">
-      <div className="h-8 w-8 border-2 border-black border-t-transparent rounded-full animate-spin" />
+    <div className="flex min-h-screen items-center justify-center bg-bg">
+      <div className="h-7 w-7 animate-spin rounded-full border-2 border-fg/20 border-t-fg" />
     </div>
   );
 }
 
 function ScrollToTop() {
   const [location] = useLocation();
-
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   }, [location]);
-
   return null;
 }
 
-export default function App() {
+function PageTransition({ children, k }: { children: React.ReactNode; k: string }) {
   return (
-    <>
+    <AnimatePresence mode="wait">
+      <motion.div
+        key={k}
+        initial={{ opacity: 0, y: 8 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -8 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+export default function App() {
+  const [location] = useLocation();
+
+  return (
+    <div className="min-h-screen bg-bg text-fg">
       <ScrollToTop />
       <Suspense fallback={<PageLoader />}>
-        <Switch>
-          <Route path="/" component={HomePage} />
-          <Route path="/company" component={CompanyPage} />
-          <Route path="/product" component={ProductPage} />
-          <Route path="/pricing" component={PricingPage} />
-          <Route path="/contact" component={ContactPage} />
-          <Route path="/privacy" component={PrivacyPage} />
-          <Route path="/resources" component={ResourcesPage} />
-          <Route component={HomePage} />
-        </Switch>
+        <PageTransition k={location}>
+          <Switch>
+            <Route path="/" component={HomePage} />
+            <Route path="/company" component={CompanyPage} />
+            <Route path="/product" component={ProductPage} />
+            <Route path="/pricing" component={PricingPage} />
+            <Route path="/contact" component={ContactPage} />
+            <Route path="/privacy" component={PrivacyPage} />
+            <Route path="/resources" component={ResourcesPage} />
+            <Route component={HomePage} />
+          </Switch>
+        </PageTransition>
       </Suspense>
-    </>
+    </div>
   );
 }

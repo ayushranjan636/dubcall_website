@@ -1,88 +1,97 @@
 import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "@/lib/motion";
 
 const faqs = [
   {
     question: "Can I start with a free trial?",
-    answer: "Yes! All plans come with a 14-day free trial. No credit card required. You can explore all features and decide which plan works best for your needs.",
+    answer: "Yes! All plans come with a 14-day free trial. No credit card required.",
   },
   {
     question: "What are included credits and how do they work?",
-    answer: "Included credits are part of your monthly plan. Each AI call uses a certain amount of credits based on call duration and complexity. When you use all included credits, additional calls are billed at your tier's rate.",
+    answer: "Included credits are part of your monthly plan. Each AI call uses credits based on duration and complexity.",
   },
   {
     question: "Can I change plans anytime?",
-    answer: "Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately, and we'll prorate your billing accordingly.",
+    answer: "Yes — upgrade or downgrade anytime. Changes are immediate and prorated.",
   },
   {
     question: "Do you offer custom plans?",
-    answer: "Absolutely! For enterprise needs, we offer custom plans tailored to your specific requirements. Contact our sales team to discuss your needs.",
+    answer: "Absolutely. For enterprise needs we offer custom plans. Contact sales to discuss.",
   },
   {
     question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards (Visa, Mastercard, American Express) and can set up wire transfers or ACH payments for enterprise customers.",
+    answer: "All major credit cards plus wire transfer / ACH for enterprise customers.",
   },
   {
     question: "Is there a setup fee or contract?",
-    answer: "No setup fees. For monthly plans, there's no long-term contract. Enterprise customers may have annual agreements with special terms.",
+    answer: "No setup fees. Monthly plans have no long-term contract.",
   },
 ];
 
 export default function ProductFAQ() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="py-24 px-4 bg-white border-t border-black/10">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Frequently Asked Questions
+    <section className="border-t border-line bg-bg py-24">
+      <div className="mx-auto max-w-3xl px-6">
+        <Reveal className="text-center">
+          <span className="eyebrow">FAQ</span>
+          <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] md:text-5xl">
+            Frequently asked
           </h2>
-          <p className="text-lg text-gray-600">
-            Everything you need to know about our pricing and product
+          <p className="mt-3 text-fg-muted">
+            Everything you need to know about pricing and product.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="border-2 border-black rounded-2xl transition-all duration-300"
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full p-6 flex items-center justify-between gap-4 hover:bg-gray-50 transition-colors"
+        <div className="mt-12 space-y-3">
+          {faqs.map((faq, i) => {
+            const isOpen = open === i;
+            return (
+              <div
+                key={i}
+                className="overflow-hidden rounded-2xl border border-line bg-surface"
               >
-                <span className="text-lg font-bold text-left">{faq.question}</span>
-                <div
-                  className={`w-6 h-6 rounded-full border-2 border-black flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
+                <button
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-surface-2"
                 >
-                  <span className="text-sm font-bold">+</span>
-                </div>
-              </button>
-
-              {openIndex === index && (
-                <div className="px-6 pb-6 border-t border-black/20 text-gray-700">
-                  {faq.answer}
-                </div>
-              )}
-            </div>
-          ))}
+                  <span className="font-semibold">{faq.question}</span>
+                  <span className="grid h-7 w-7 flex-shrink-0 place-items-center rounded-full border border-line text-fg">
+                    {isOpen ? <Minus size={14} /> : <Plus size={14} />}
+                  </span>
+                </button>
+                <AnimatePresence initial={false}>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      className="overflow-hidden"
+                    >
+                      <p className="border-t border-line px-6 py-4 text-sm leading-relaxed text-fg-muted">
+                        {faq.answer}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
         </div>
 
-        <div className="mt-16 text-center p-8 border-2 border-black rounded-2xl bg-white shadow-[8px_10px_0px_0px_rgba(0,0,0,0.08)]">
-          <h3 className="text-2xl font-bold mb-2">Still have questions?</h3>
-          <p className="text-gray-700 mb-6">
-            Our team is here to help. Reach out and we'll get back to you within 24 hours.
+        <Reveal className="card mt-12 p-8 text-center">
+          <h3 className="text-xl font-semibold">Still have questions?</h3>
+          <p className="mt-2 text-sm text-fg-muted">
+            We respond within 24 hours.
           </p>
-          <a
-            href="mailto:support@dubcall.com"
-            className="inline-block px-8 py-3 rounded-lg border-2 border-black font-bold hover:bg-black hover:text-white transition-colors"
-          >
-            Contact Support
+          <a href="mailto:support@dubcall.com" className="btn-secondary mt-5 inline-flex">
+            Contact support
           </a>
-        </div>
+        </Reveal>
       </div>
     </section>
   );
