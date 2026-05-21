@@ -118,7 +118,7 @@ export default function UseCase() {
           </p>
         </Reveal>
 
-        <div className="grid gap-8 lg:grid-cols-[300px_1fr]">
+        <div className="grid items-stretch gap-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.55fr)]">
           {/* Left: vertical tabs */}
           <div className="flex flex-col gap-2">
             {industries.map((ind, i) => {
@@ -128,7 +128,7 @@ export default function UseCase() {
                   key={ind.id}
                   onClick={() => setActive(i)}
                   className={cn(
-                    "group relative overflow-hidden rounded-2xl border p-4 text-left transition-all duration-500 ease-apple",
+                    "group relative flex-1 overflow-hidden rounded-2xl border p-4 text-left transition-all duration-500 ease-apple",
                     isActive
                       ? "border-fg/20 bg-surface shadow-soft"
                       : "border-line bg-surface/40 hover:border-fg/15 hover:bg-surface"
@@ -144,7 +144,7 @@ export default function UseCase() {
                   <div className="flex items-center gap-3 pl-3">
                     <div
                       className={cn(
-                        "grid h-10 w-10 place-items-center rounded-xl border transition-all duration-500",
+                        "grid h-10 w-10 flex-shrink-0 place-items-center rounded-xl border transition-all duration-500",
                         isActive
                           ? "border-fg/20 bg-fg text-bg"
                           : "border-line text-fg-muted group-hover:text-fg"
@@ -152,9 +152,9 @@ export default function UseCase() {
                     >
                       <ind.Icon size={16} />
                     </div>
-                    <div>
+                    <div className="min-w-0">
                       <div className="text-sm font-semibold">{ind.label}</div>
-                      <div className="mt-0.5 text-[11px] text-fg-subtle line-clamp-1">
+                      <div className="mt-0.5 truncate text-[11px] text-fg-subtle">
                         {ind.fullName}
                       </div>
                     </div>
@@ -164,7 +164,7 @@ export default function UseCase() {
             })}
 
             {/* Progress meter */}
-            <div className="mt-3 px-1">
+            <div className="mt-1 px-1">
               <div className="flex items-center gap-1">
                 {industries.map((_, i) => (
                   <button
@@ -190,10 +190,10 @@ export default function UseCase() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={reduce ? undefined : { opacity: 0, y: -18 }}
                 transition={{ duration: 0.55, ease: EASE }}
-                className="card overflow-hidden"
+                className="card flex h-full flex-col overflow-hidden"
               >
                 {/* Hero image with overlay */}
-                <div className="relative aspect-[16/9] w-full overflow-hidden">
+                <div className="relative aspect-[21/9] w-full overflow-hidden">
                   <motion.img
                     key={`img-${current.id}`}
                     initial={reduce ? false : { scale: 1.08, opacity: 0 }}
@@ -206,27 +206,27 @@ export default function UseCase() {
                   />
                   {/* Color wash */}
                   <div className="absolute inset-0 bg-gradient-to-br from-fg/40 via-fg/10 to-transparent" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/30 to-transparent" />
 
                   {/* Floating chip — top-left */}
                   <motion.div
                     initial={reduce ? false : { opacity: 0, x: -16 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.6, delay: 0.15, ease: EASE }}
-                    className="absolute left-5 top-5 inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs font-semibold"
+                    className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full glass px-3 py-1.5 text-xs font-semibold"
                   >
                     <current.Icon size={12} />
                     {current.label}
                   </motion.div>
 
                   {/* Tagline + name */}
-                  <div className="absolute inset-x-0 bottom-0 p-6 sm:p-8">
+                  <div className="absolute inset-x-0 bottom-0 p-5 sm:p-6">
                     <motion.h3
                       key={`t-${current.id}`}
                       initial={reduce ? false : { opacity: 0, y: 12 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.2, ease: EASE }}
-                      className="text-2xl font-semibold tracking-tight sm:text-3xl"
+                      className="text-xl font-semibold tracking-tight sm:text-2xl"
                     >
                       {current.tagline}
                     </motion.h3>
@@ -242,14 +242,14 @@ export default function UseCase() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ duration: 0.5, delay: 0.25 + i * 0.07, ease: EASE }}
                       className={cn(
-                        "px-5 py-5 text-center",
+                        "px-4 py-3.5 text-center",
                         i < 2 && "border-r border-line"
                       )}
                     >
-                      <div className="text-2xl font-semibold tracking-tight sm:text-3xl">
+                      <div className="text-xl font-semibold tracking-tight sm:text-2xl">
                         {s.v}
                       </div>
-                      <div className="mt-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                      <div className="mt-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
                         {s.l}
                       </div>
                     </motion.div>
@@ -257,17 +257,17 @@ export default function UseCase() {
                 </div>
 
                 {/* Benefits */}
-                <div className="p-6 sm:p-8">
-                  <div className="mb-5 flex items-center justify-between">
-                    <h4 className="text-sm font-semibold uppercase tracking-[0.14em] text-fg-subtle">
+                <div className="flex flex-1 flex-col p-5 sm:p-6">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h4 className="text-[11px] font-semibold uppercase tracking-[0.14em] text-fg-subtle">
                       What the agent handles
                     </h4>
-                    <span className="text-xs text-fg-subtle">
+                    <span className="font-mono text-[11px] text-fg-subtle">
                       {String(active + 1).padStart(2, "0")} /{" "}
                       {String(industries.length).padStart(2, "0")}
                     </span>
                   </div>
-                  <ul className="grid gap-2.5 sm:grid-cols-2">
+                  <ul className="grid flex-1 gap-2 sm:grid-cols-2">
                     {current.benefits.map((b, i) => (
                       <motion.li
                         key={`${current.id}-b-${i}`}
@@ -278,10 +278,10 @@ export default function UseCase() {
                           delay: 0.3 + i * 0.05,
                           ease: EASE,
                         }}
-                        className="group flex items-start gap-2.5 rounded-xl border border-line bg-surface/60 px-3 py-2.5 text-sm text-fg-muted transition-colors hover:border-fg/15 hover:bg-surface hover:text-fg"
+                        className="group flex items-start gap-2 rounded-lg border border-line bg-surface/60 px-2.5 py-2 text-[13px] leading-snug text-fg-muted transition-colors hover:border-fg/15 hover:bg-surface hover:text-fg"
                       >
                         <CheckCircle2
-                          size={14}
+                          size={13}
                           className="mt-0.5 flex-shrink-0 text-accent"
                           strokeWidth={2.2}
                         />
