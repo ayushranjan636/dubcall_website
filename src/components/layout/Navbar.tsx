@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import TalkToUs from "@/components/shared/TalkToUs";
 import ThemeToggle from "@/components/shared/ThemeToggle";
@@ -51,11 +51,13 @@ export default function Navbar() {
         )}
       >
         <div className="flex items-center gap-1">
-          <Link href="/" className="flex items-center gap-2 pr-3">
-            <span className="grid h-8 w-8 place-items-center rounded-lg bg-fg text-bg shadow-soft">
-              <Phone size={14} strokeWidth={2.5} />
-            </span>
-            <span className="text-base font-semibold tracking-tight">DubCall</span>
+          <Link href="/" aria-label="DubCall home" className="flex items-center pr-3">
+            <img
+              src="/images/dubcall-logo.png"
+              alt="DubCall"
+              className="h-7 w-auto select-none object-contain dark:invert"
+              draggable={false}
+            />
           </Link>
 
           <div className="ml-3 hidden md:flex items-center gap-0.5">

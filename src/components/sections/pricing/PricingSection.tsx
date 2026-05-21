@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
 import { cn } from "@/lib/cn";
 
@@ -9,7 +9,7 @@ const plans = [
     price: { monthly: 99, annual: 79 },
     description: "Perfect for small businesses getting started",
     features: [
-      "1,000 minutes/month",
+      "1,000 minutes / month",
       "5 voice agents",
       "Basic integrations",
       "Email support",
@@ -24,7 +24,7 @@ const plans = [
     price: { monthly: 299, annual: 239 },
     description: "Best for growing teams and businesses",
     features: [
-      "5,000 minutes/month",
+      "5,000 minutes / month",
       "20 voice agents",
       "Advanced integrations",
       "Priority support",
@@ -60,15 +60,23 @@ export default function PricingSection() {
   const [cycle, setCycle] = useState<"monthly" | "annual">("monthly");
 
   return (
-    <section className="bg-bg py-24" id="pricing">
+    <section className="relative isolate overflow-hidden bg-bg py-24" id="pricing">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute left-1/2 top-0 h-[400px] w-[600px] -translate-x-1/2 rounded-full bg-accent/15 blur-[140px] dc-mesh-blob-1" />
+      </div>
+
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="text-center">
-          <span className="eyebrow">Pricing</span>
-          <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] md:text-6xl">
-            Pricing that scales with you.
-          </h2>
-          <p className="mt-4 text-fg-muted">
-            Start free. Upgrade when you're ready.
+          <span className="eyebrow">
+            <Sparkles size={12} className="text-accent" />
+            Pricing
+          </span>
+          <h1 className="mt-5 text-4xl font-semibold tracking-[-0.03em] md:text-6xl">
+            Pricing that <span className="gradient-text">scales</span> with you.
+          </h1>
+          <p className="mx-auto mt-4 max-w-xl text-fg-muted">
+            Start free. Upgrade when you're ready. No hidden costs — flat
+            platform fee plus usage-based credits.
           </p>
         </Reveal>
 
@@ -84,7 +92,9 @@ export default function PricingSection() {
                 )}
               >
                 {c}
-                {c === "annual" && <span className="ml-1 text-[10px] text-success">-20%</span>}
+                {c === "annual" && (
+                  <span className="ml-1 text-[10px] text-success">-20%</span>
+                )}
               </button>
             ))}
           </div>

@@ -5,38 +5,38 @@ import { Reveal } from "@/lib/motion";
 
 const faqs = [
   {
-    question: "How fast can I deploy a voice agent?",
+    question: "Can I start with a free trial?",
     answer:
-      "Most teams ship their first agent in under a day using Agent Studio — pick a voice, define goals, connect integrations, and go live. No code required.",
+      "Yes — every plan includes a 14-day free trial. No credit card required. You can explore all features and decide which plan works best.",
   },
   {
-    question: "What languages does DubCall support?",
+    question: "What are included credits and how do they work?",
     answer:
-      "32+ languages including English, Hindi, and regional Indian dialects. Agents support real-time code-switching mid-conversation.",
+      "Each plan includes a monthly credit allowance. Calls consume credits based on duration and complexity. When you've used your allowance, additional calls are billed at your tier's per-credit rate.",
   },
   {
-    question: "How natural do the conversations sound?",
+    question: "Can I change plans anytime?",
     answer:
-      "Sub-second latency with emotion, interruption handling, and contextual memory. Most callers can't tell they're speaking with an AI.",
+      "Yes — upgrade or downgrade anytime. Changes take effect immediately and we prorate your billing.",
   },
   {
-    question: "Can the agent take real actions, not just talk?",
+    question: "Do you offer custom pricing?",
     answer:
-      "Yes — DubCall agents update your CRM, book calendar slots, send emails or SMS, trigger Zapier/Make flows, and call any REST API in real time.",
+      "Absolutely. Enterprise customers get tailored pricing, dedicated support, white-label, and custom SLAs. Contact sales to discuss.",
   },
   {
-    question: "Is my data secure?",
+    question: "What payment methods do you accept?",
     answer:
-      "All calls are end-to-end encrypted and we're SOC 2 compliance in progress. Your data is never used to train shared models — it stays in your tenant.",
+      "All major credit cards (Visa, Mastercard, Amex). Wire transfer / ACH available for annual enterprise contracts.",
   },
   {
-    question: "Does DubCall integrate with my existing stack?",
+    question: "Is there a setup fee or long-term contract?",
     answer:
-      "Out-of-the-box connectors for HubSpot, Salesforce, Pipedrive, Zoho, Google/Outlook Calendar, Slack, Gmail, and Stripe — plus a universal REST + Webhook bridge.",
+      "No setup fees. Monthly plans have no long-term commitment. Annual plans get a 20% discount.",
   },
 ];
 
-export default function ProductFAQ() {
+export default function PricingFAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
@@ -45,11 +45,8 @@ export default function ProductFAQ() {
         <Reveal className="text-center">
           <span className="eyebrow">FAQ</span>
           <h2 className="mt-5 text-3xl font-semibold tracking-[-0.02em] md:text-5xl">
-            Product questions, answered.
+            Pricing questions
           </h2>
-          <p className="mt-3 text-fg-muted">
-            Everything about how DubCall works.
-          </p>
         </Reveal>
 
         <div className="mt-12 space-y-3">
@@ -88,16 +85,6 @@ export default function ProductFAQ() {
             );
           })}
         </div>
-
-        <Reveal className="card mt-12 p-8 text-center">
-          <h3 className="text-xl font-semibold">Still have questions?</h3>
-          <p className="mt-2 text-sm text-fg-muted">
-            We respond within 24 hours.
-          </p>
-          <a href="mailto:support@dubcall.com" className="btn-secondary mt-5 inline-flex">
-            Contact support
-          </a>
-        </Reveal>
       </div>
     </section>
   );
