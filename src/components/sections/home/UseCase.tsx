@@ -5,7 +5,7 @@ const industries = [
     id: 1,
     label: "Healthcare",
     fullName: "Healthcare & Medical Services",
-    image: "/dubcall/healthcare.jpg",
+    image: "/images/healthcare.jpg",
     benefits: [
       "Automated appointment reminders & scheduling",
       "Patient follow-up calls and consultations",
@@ -18,7 +18,7 @@ const industries = [
     id: 2,
     label: "Real Estate",
     fullName: "Real Estate & Property Management",
-    image: "/dubcall/Real-Estate.jpg",
+    image: "/images/Real-Estate.jpg",
     benefits: [
       "Lead qualification and property inquiries",
       "Showing reminders and confirmations",
@@ -31,7 +31,7 @@ const industries = [
     id: 3,
     label: "Finance",
     fullName: "Finance & Banking",
-    image: "/dubcall/finance.png",
+    image: "/images/finance.png",
     benefits: [
       "Loan application follow-ups",
       "Payment reminders and collection",
@@ -44,7 +44,7 @@ const industries = [
     id: 4,
     label: "E-commerce",
     fullName: "E-commerce & Retail",
-    image: "/dubcall/ecommerce.png",
+    image: "/images/ecommerce.png",
     benefits: [
       "Order status updates and tracking",
       "Return & refund processing",

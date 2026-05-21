@@ -1,10 +1,10 @@
-import DubCallNavbar from "@/components/dubcall/Navbar";
-import DubCallFooter from "@/components/dubcall/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
-export default function DubCallPrivacyPage() {
+export default function PrivacyPage() {
   return (
     <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
-      <DubCallNavbar />
+      <Navbar />
 
       <section className="py-16 md:py-24 px-4">
         <div className="max-w-3xl mx-auto">
@@ -92,7 +92,7 @@ export default function DubCallPrivacyPage() {
         </div>
       </section>
 
-      <DubCallFooter />
+      <Footer />
     </div>
   );
 }

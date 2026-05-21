@@ -55,7 +55,7 @@ const plans = [
   },
 ];
 
-export default function DubCallPricingSection() {
+export default function PricingSection() {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "annual">("monthly");
 
   return (

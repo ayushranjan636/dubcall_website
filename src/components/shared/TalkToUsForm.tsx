@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { openContactMailto } from "@/utils/contact-mailto";
+import { openContactMailto } from "@/lib/contact-mailto";
 
 export default function TalkToUsForm() {
   const [formData, setFormData] = useState({

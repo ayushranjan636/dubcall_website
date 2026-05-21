@@ -31,7 +31,7 @@ export default function CompanyVision() {
             {/* Right side - Vision Image */}
             <div className="relative bg-gray-50 min-h-96 md:min-h-full overflow-hidden">
               <img
-                src="/dubcall/vision.png"
+                src="/images/vision.png"
                 alt="Vision"
                 className="w-full h-full object-cover"
                 style={{ minHeight: "384px" }}

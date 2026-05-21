@@ -3,13 +3,13 @@ const teamMembers = [
     name: "Pretam Ram",
     role: "FOUNDER & CEO",
     bio: "Former Software Developer at Deepnap Softech. Built scalable SaaS. Owns core AI voice platform, reliability, and delivery. Led end-to-end product development.",
-    image: "/dubcall/pretam-Kumar-Ram.png",
+    image: "/images/pretam-Kumar-Ram.png",
   },
   {
     name: "Piyush Modi",
     role: "CO-FOUNDER & CBO",
     bio: "Led go-to-market strategy. Closed first revenue. Owns GTM & sales. Drives customer growth. Performance marketing across Google & Meta Ads.",
-    image: "/dubcall/Piyush-Modi.png",
+    image: "/images/Piyush-Modi.png",
   },
 ];
 

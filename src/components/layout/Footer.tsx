@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function DubCallFooter() {
+export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
 

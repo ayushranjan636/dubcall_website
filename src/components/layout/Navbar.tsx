@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLocation } from "wouter";
-import TalkToUs from "./TalkToUs";
+import TalkToUs from "@/components/shared/TalkToUs";
 
-export default function DubCallNavbar() {
+export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [talkToUsOpen, setTalkToUsOpen] = useState(false);
   const [location] = useLocation();
@@ -23,7 +23,7 @@ export default function DubCallNavbar() {
           {/* Logo */}
           <a href="/" className="flex items-center group pr-2">
             <img
-              src="/dubcall/dubcall-logo.png"
+              src="/images/dubcall-logo.png"
               alt="DubCall"
               width={96}
               height={96}

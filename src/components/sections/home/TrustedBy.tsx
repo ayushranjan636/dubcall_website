@@ -1,12 +1,12 @@
 const logos = [
-  { name: "Rivet Global", image: "/dubcall/rivet-global.png" },
-  { name: "SlateMate", image: "/dubcall/SlateMate-logo-2.png" },
-  { name: "Franchise Batao", image: "/dubcall/Franchise-batao-logo-newww.jpg" },
-  { name: "The HNH", image: "/dubcall/the-hnh-logo-scaled.jpg" },
-  { name: "Rivet Global", image: "/dubcall/rivet-global.png" },
-  { name: "SlateMate", image: "/dubcall/SlateMate-logo-2.png" },
-  { name: "Franchise Batao", image: "/dubcall/Franchise-batao-logo-newww.jpg" },
-  { name: "The HNH", image: "/dubcall/the-hnh-logo-scaled.jpg" },
+  { name: "Rivet Global", image: "/images/rivet-global.png" },
+  { name: "SlateMate", image: "/images/SlateMate-logo-2.png" },
+  { name: "Franchise Batao", image: "/images/Franchise-batao-logo-newww.jpg" },
+  { name: "The HNH", image: "/images/the-hnh-logo-scaled.jpg" },
+  { name: "Rivet Global", image: "/images/rivet-global.png" },
+  { name: "SlateMate", image: "/images/SlateMate-logo-2.png" },
+  { name: "Franchise Batao", image: "/images/Franchise-batao-logo-newww.jpg" },
+  { name: "The HNH", image: "/images/the-hnh-logo-scaled.jpg" },
 ];
 
 export default function DubCallTrustedBy() {

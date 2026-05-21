@@ -1,5 +1,5 @@
-import DubCallNavbar from "@/components/dubcall/Navbar";
-import DubCallFooter from "@/components/dubcall/Footer";
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
 
 const resources = [
   {
@@ -48,10 +48,10 @@ const resources = [
   },
 ];
 
-export default function DubCallResourcesPage() {
+export default function ResourcesPage() {
   return (
     <div className="dubcall-page min-h-screen bg-white text-black overflow-x-hidden">
-      <DubCallNavbar />
+      <Navbar />
 
       {/* Hero */}
       <section className="py-24 px-4 bg-white text-center relative overflow-hidden">
@@ -127,7 +127,7 @@ export default function DubCallResourcesPage() {
         </div>
       </section>
 
-      <DubCallFooter />
+      <Footer />
     </div>
   );
 }
