@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import TalkToUs from "@/components/shared/TalkToUs";
 import ThemeToggle from "@/components/shared/ThemeToggle";
@@ -87,12 +87,18 @@ export default function Navbar() {
 
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
-          <Link
+          <a
             href="https://console.dubcall.com/overview"
-            className="rounded-full px-3 py-1.5 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-bg/40 px-3.5 py-1.5 text-sm font-semibold text-fg transition-all duration-300 ease-apple hover:-translate-y-0.5 hover:border-fg/30 hover:bg-fg/5"
           >
             Sign in
-          </Link>
+            <ExternalLink
+              size={12}
+              className="text-fg-muted transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-fg"
+            />
+          </a>
           <button
             onClick={() => setTalkToUsOpen(true)}
             className="rounded-full bg-fg px-4 py-1.5 text-sm font-semibold text-bg shadow-soft transition-transform duration-300 ease-apple hover:-translate-y-0.5 active:scale-95"
@@ -135,12 +141,15 @@ export default function Navbar() {
             ))}
             <div className="mt-2 flex items-center gap-2 border-t border-line pt-3">
               <ThemeToggle />
-              <Link
-                href="/contact"
-                className="flex-1 rounded-full border border-line px-3 py-2 text-center text-sm font-medium"
+              <a
+                href="https://console.dubcall.com/overview"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-line px-3 py-2 text-center text-sm font-semibold transition-colors hover:bg-fg/5"
               >
                 Sign in
-              </Link>
+                <ExternalLink size={11} className="text-fg-muted" />
+              </a>
               <button
                 onClick={() => {
                   setTalkToUsOpen(true);
