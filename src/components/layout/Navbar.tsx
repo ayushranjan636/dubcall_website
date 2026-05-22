@@ -88,7 +88,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
           <Link
-            href="/contact"
+            href="https://console.dubcall.com/overview"
             className="rounded-full px-3 py-1.5 text-sm font-medium text-fg-muted transition-colors hover:text-fg"
           >
             Sign in
