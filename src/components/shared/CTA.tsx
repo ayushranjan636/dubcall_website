@@ -1,5 +1,6 @@
 import { Link } from "wouter";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ExternalLink } from "lucide-react";
+import { consoleLinkProps } from "@/lib/links";
 import { Reveal } from "@/lib/motion";
 
 export default function CTA() {
@@ -26,10 +27,10 @@ export default function CTA() {
             </p>
 
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-primary">
+              <a {...consoleLinkProps()} className="btn-primary">
                 Get a live demo
-                <ArrowRight size={16} />
-              </Link>
+                <ExternalLink size={14} />
+              </a>
               <Link href="/pricing" className="btn-secondary">
                 See pricing
               </Link>

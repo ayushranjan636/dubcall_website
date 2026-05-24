@@ -1,6 +1,6 @@
-import { Link } from "wouter";
-import { ArrowRight, Sparkles } from "lucide-react";
+import { ExternalLink, Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
+import { consoleLinkProps } from "@/lib/links";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -59,12 +59,12 @@ export default function ProductHero() {
         transition={{ duration: 0.7, ease: EASE, delay: 0.45 }}
         className="mt-9 flex flex-col items-center gap-3 sm:flex-row"
       >
-        <Link href="/contact" className="btn-primary">
-          Book a demo <ArrowRight size={16} />
-        </Link>
-        <Link href="/contact" className="btn-secondary">
-          Try free
-        </Link>
+        <a {...consoleLinkProps()} className="btn-primary">
+          Book a demo <ExternalLink size={14} />
+        </a>
+        <a {...consoleLinkProps()} className="btn-secondary">
+          Try free <ExternalLink size={14} />
+        </a>
       </motion.div>
     </section>
   );

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/lib/motion";
+import { useTalkToUs } from "@/lib/talk-to-us";
 
 const faqs = [
   {
@@ -38,6 +39,7 @@ const faqs = [
 
 export default function ProductFAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const { open: openTalkToUs } = useTalkToUs();
 
   return (
     <section className="border-t border-line bg-bg py-24">
@@ -94,9 +96,9 @@ export default function ProductFAQ() {
           <p className="mt-2 text-sm text-fg-muted">
             We respond within 24 hours.
           </p>
-          <a href="mailto:support@dubcall.com" className="btn-secondary mt-5 inline-flex">
+          <button onClick={openTalkToUs} className="btn-secondary mt-5 inline-flex">
             Contact support
-          </a>
+          </button>
         </Reveal>
       </div>
     </section>

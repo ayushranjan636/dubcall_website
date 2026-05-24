@@ -1,6 +1,8 @@
 import { useEffect, Suspense, lazy } from "react";
 import { Switch, Route, useLocation } from "wouter";
 import { AnimatePresence, motion } from "framer-motion";
+import { TalkToUsProvider } from "@/lib/talk-to-us";
+import TalkToUs from "@/components/shared/TalkToUs";
 
 const HomePage = lazy(() => import("@/pages/HomePage"));
 const CompanyPage = lazy(() => import("@/pages/CompanyPage"));
@@ -46,22 +48,26 @@ export default function App() {
   const [location] = useLocation();
 
   return (
-    <div className="min-h-screen bg-bg text-fg">
-      <ScrollToTop />
-      <Suspense fallback={<PageLoader />}>
-        <PageTransition k={location}>
-          <Switch>
-            <Route path="/" component={HomePage} />
-            <Route path="/company" component={CompanyPage} />
-            <Route path="/product" component={ProductPage} />
-            <Route path="/pricing" component={PricingPage} />
-            <Route path="/contact" component={ContactPage} />
-            <Route path="/privacy" component={PrivacyPage} />
-            <Route path="/resources" component={ResourcesPage} />
-            <Route component={HomePage} />
-          </Switch>
-        </PageTransition>
-      </Suspense>
-    </div>
+    <TalkToUsProvider>
+      <div className="min-h-screen bg-bg text-fg">
+        <ScrollToTop />
+        <Suspense fallback={<PageLoader />}>
+          <PageTransition k={location}>
+            <Switch>
+              <Route path="/" component={HomePage} />
+              <Route path="/company" component={CompanyPage} />
+              <Route path="/product" component={ProductPage} />
+              <Route path="/pricing" component={PricingPage} />
+              <Route path="/contact" component={ContactPage} />
+              <Route path="/privacy" component={PrivacyPage} />
+              <Route path="/resources" component={ResourcesPage} />
+              <Route component={HomePage} />
+            </Switch>
+          </PageTransition>
+        </Suspense>
+        {/* Global modal — mounted once, opened from anywhere via useTalkToUs() */}
+        <TalkToUs />
+      </div>
+    </TalkToUsProvider>
   );
 }

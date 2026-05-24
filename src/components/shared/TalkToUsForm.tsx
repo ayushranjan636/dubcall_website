@@ -1,19 +1,22 @@
 import { useState } from "react";
-import { Check } from "lucide-react";
-import { openContactMailto } from "@/lib/contact-mailto";
+import { Check, AlertCircle, ExternalLink, ArrowRight } from "lucide-react";
+import { sendContactEmails, type ContactFormData } from "@/lib/email";
+import { consoleLinkProps, SUPPORT_EMAIL } from "@/lib/links";
 import { Reveal } from "@/lib/motion";
 
+const initialForm: ContactFormData = {
+  name: "",
+  email: "",
+  company: "",
+  topic: "",
+  message: "",
+  urgency: "normal",
+};
+
 export default function TalkToUsForm() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    topic: "",
-    message: "",
-    urgency: "normal",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<ContactFormData>(initialForm);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -22,21 +25,20 @@ export default function TalkToUsForm() {
     setFormData((p) => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    openContactMailto(formData);
-    setSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      topic: "",
-      message: "",
-      urgency: "normal",
-    });
-    setTimeout(() => setSubmitted(false), 3500);
-    setLoading(false);
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      await sendContactEmails(formData);
+      setStatus("sent");
+      setFormData(initialForm);
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(
+        err instanceof Error ? err.message : "Couldn't send. Please try again."
+      );
+    }
   };
 
   return (
@@ -52,20 +54,37 @@ export default function TalkToUsForm() {
           </p>
         </div>
 
-        {submitted ? (
-          <div className="space-y-4 py-12 text-center">
+        {status === "sent" ? (
+          <div className="space-y-4 py-10 text-center">
             <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-success/15 text-success">
               <Check size={32} strokeWidth={2.5} />
             </div>
-            <h3 className="text-2xl font-semibold">Thank you!</h3>
-            <p className="text-fg-muted">Our team will contact you soon.</p>
-            <div className="border-t border-line pt-4 text-sm text-fg-muted">
+            <h3 className="text-2xl font-semibold">Thank you for writing to us!</h3>
+            <p className="mx-auto max-w-md leading-relaxed text-fg-muted">
+              We've received your message and our team will get back to you soon.
+              Meanwhile, feel free to explore the DubCall console.
+            </p>
+            <div className="mx-auto mt-4 flex max-w-md flex-col gap-3 pt-2 sm:flex-row">
+              <a
+                {...consoleLinkProps()}
+                className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-fg px-5 py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
+              >
+                Explore console <ExternalLink size={13} />
+              </a>
+              <button
+                onClick={() => setStatus("idle")}
+                className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-line px-5 py-3 text-sm font-semibold transition-colors hover:bg-fg/5"
+              >
+                Send another <ArrowRight size={13} />
+              </button>
+            </div>
+            <div className="border-t border-line pt-5 text-sm text-fg-muted">
               Urgent?{" "}
               <a
-                href="mailto:support@dubcall.com"
+                href={`mailto:${SUPPORT_EMAIL}`}
                 className="font-semibold text-fg underline"
               >
-                support@dubcall.com
+                {SUPPORT_EMAIL}
               </a>
             </div>
           </div>
@@ -96,12 +115,26 @@ export default function TalkToUsForm() {
                 className="w-full resize-none rounded-xl border border-line bg-surface px-4 py-3 text-sm placeholder:text-fg-subtle focus:border-fg/30 focus:outline-none"
               />
             </div>
+
+            {status === "error" && (
+              <div className="flex items-start gap-2 rounded-xl border border-danger/30 bg-danger/10 px-4 py-3 text-sm text-danger">
+                <AlertCircle size={16} className="mt-0.5 flex-shrink-0" />
+                <span>
+                  {errorMsg || "Couldn't send."} You can also email us directly at{" "}
+                  <a href={`mailto:${SUPPORT_EMAIL}`} className="underline font-semibold">
+                    {SUPPORT_EMAIL}
+                  </a>
+                  .
+                </span>
+              </div>
+            )}
+
             <button
               type="submit"
-              disabled={loading}
+              disabled={status === "sending"}
               className="w-full rounded-full bg-fg py-3.5 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-50"
             >
-              {loading ? "Sending…" : "Send message"}
+              {status === "sending" ? "Sending…" : "Send message"}
             </button>
           </form>
         )}

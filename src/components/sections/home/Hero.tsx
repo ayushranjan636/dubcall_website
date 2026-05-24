@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { Link } from "wouter";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, Sparkles, Headphones, Target, TrendingUp } from "lucide-react";
+import { Sparkles, Headphones, Target, TrendingUp, ExternalLink } from "lucide-react";
+import { consoleLinkProps } from "@/lib/links";
 import { cn } from "@/lib/cn";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -140,13 +140,14 @@ export default function Hero() {
               transition={{ duration: 0.7, ease: EASE, delay: 0.4 }}
               className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
             >
-              <Link href="/contact" className="btn-primary">
+              <a {...consoleLinkProps()} className="btn-primary">
                 Get a live demo
-                <ArrowRight size={16} />
-              </Link>
-              <Link href="/product" className="btn-secondary">
+                <ExternalLink size={14} />
+              </a>
+              <a {...consoleLinkProps()} className="btn-secondary">
                 Explore the platform
-              </Link>
+                <ExternalLink size={14} />
+              </a>
             </motion.div>
 
             <motion.div

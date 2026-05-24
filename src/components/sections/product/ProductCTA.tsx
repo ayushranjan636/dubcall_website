@@ -1,5 +1,5 @@
-import { Link } from "wouter";
-import { ArrowRight, Check } from "lucide-react";
+import { ExternalLink, Check } from "lucide-react";
+import { consoleLinkProps } from "@/lib/links";
 import { Reveal } from "@/lib/motion";
 
 export default function ProductCTA() {
@@ -20,12 +20,12 @@ export default function ProductCTA() {
               in under 5 minutes. No code.
             </p>
             <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href="/contact" className="btn-primary">
-                Start free trial <ArrowRight size={16} />
-              </Link>
-              <Link href="/contact" className="btn-secondary">
-                Book a demo
-              </Link>
+              <a {...consoleLinkProps()} className="btn-primary">
+                Start free trial <ExternalLink size={14} />
+              </a>
+              <a {...consoleLinkProps()} className="btn-secondary">
+                Book a demo <ExternalLink size={14} />
+              </a>
             </div>
             <div className="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs text-fg-muted">
               {["14-day free trial", "No credit card required", "Cancel anytime"].map(

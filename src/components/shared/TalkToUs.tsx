@@ -1,35 +1,45 @@
 import { useState, useEffect } from "react";
-import { X, Check } from "lucide-react";
+import { X, Check, ArrowRight, AlertCircle, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { openContactMailto } from "@/lib/contact-mailto";
+import { sendContactEmails, type ContactFormData } from "@/lib/email";
+import { consoleLinkProps } from "@/lib/links";
+import { useTalkToUs } from "@/lib/talk-to-us";
 
-interface TalkToUsProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
+const initialForm: ContactFormData = {
+  name: "",
+  email: "",
+  company: "",
+  topic: "",
+  message: "",
+  urgency: "normal",
+};
 
-export default function TalkToUs({ isOpen, onClose }: TalkToUsProps) {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    company: "",
-    topic: "",
-    message: "",
-    urgency: "normal",
-  });
-  const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+export default function TalkToUs() {
+  const { isOpen, close } = useTalkToUs();
+  const [formData, setFormData] = useState<ContactFormData>(initialForm);
+  const [status, setStatus] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     if (!isOpen) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
     document.addEventListener("keydown", onKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKey);
       document.body.style.overflow = "";
     };
-  }, [isOpen, onClose]);
+  }, [isOpen, close]);
+
+  useEffect(() => {
+    if (!isOpen) {
+      const t = setTimeout(() => {
+        setStatus("idle");
+        setFormData(initialForm);
+      }, 250);
+      return () => clearTimeout(t);
+    }
+  }, [isOpen]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -38,24 +48,19 @@ export default function TalkToUs({ isOpen, onClose }: TalkToUsProps) {
     setFormData((p) => ({ ...p, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    openContactMailto(formData);
-    setSubmitted(true);
-    setFormData({
-      name: "",
-      email: "",
-      company: "",
-      topic: "",
-      message: "",
-      urgency: "normal",
-    });
-    setTimeout(() => {
-      setSubmitted(false);
-      onClose();
-    }, 2400);
-    setLoading(false);
+    setStatus("sending");
+    setErrorMsg("");
+    try {
+      await sendContactEmails(formData);
+      setStatus("sent");
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
@@ -67,7 +72,7 @@ export default function TalkToUs({ isOpen, onClose }: TalkToUsProps) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.2 }}
           className="fixed inset-0 z-[60] flex items-center justify-center bg-fg/40 backdrop-blur-md p-4"
-          onClick={onClose}
+          onClick={close}
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.96, y: 12 }}
@@ -80,7 +85,7 @@ export default function TalkToUs({ isOpen, onClose }: TalkToUsProps) {
             <div className="flex items-center justify-between border-b border-line p-5">
               <h2 className="text-lg font-semibold">Talk to us</h2>
               <button
-                onClick={onClose}
+                onClick={close}
                 className="grid h-8 w-8 place-items-center rounded-full text-fg-muted transition-colors hover:bg-fg/5 hover:text-fg"
                 aria-label="Close"
               >
@@ -89,16 +94,8 @@ export default function TalkToUs({ isOpen, onClose }: TalkToUsProps) {
             </div>
 
             <div className="p-6">
-              {submitted ? (
-                <div className="space-y-3 py-8 text-center">
-                  <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-success/15 text-success">
-                    <Check size={28} strokeWidth={2.5} />
-                  </div>
-                  <h3 className="text-xl font-semibold">Thank you!</h3>
-                  <p className="text-sm text-fg-muted">
-                    Our team will contact you soon.
-                  </p>
-                </div>
+              {status === "sent" ? (
+                <SuccessPanel onClose={close} />
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <Field label="Full name *" name="name" value={formData.name} onChange={handleChange} required placeholder="Your name" />
@@ -126,12 +123,20 @@ export default function TalkToUs({ isOpen, onClose }: TalkToUsProps) {
                       className="w-full resize-none rounded-xl border border-line bg-surface px-3 py-2.5 text-sm placeholder:text-fg-subtle focus:border-fg/30 focus:outline-none"
                     />
                   </div>
+
+                  {status === "error" && (
+                    <div className="flex items-start gap-2 rounded-xl border border-danger/30 bg-danger/10 px-3 py-2.5 text-xs text-danger">
+                      <AlertCircle size={14} className="mt-0.5 flex-shrink-0" />
+                      <span>{errorMsg || "Couldn't send. Please try again or email business@dubcall.com."}</span>
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    disabled={loading}
+                    disabled={status === "sending"}
                     className="w-full rounded-full bg-fg py-3 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5 active:scale-95 disabled:opacity-50"
                   >
-                    {loading ? "Sending…" : "Send message"}
+                    {status === "sending" ? "Sending…" : "Send message"}
                   </button>
                 </form>
               )}
@@ -140,6 +145,37 @@ export default function TalkToUs({ isOpen, onClose }: TalkToUsProps) {
         </motion.div>
       )}
     </AnimatePresence>
+  );
+}
+
+function SuccessPanel({ onClose }: { onClose: () => void }) {
+  return (
+    <div className="space-y-4 py-6 text-center">
+      <div className="mx-auto grid h-14 w-14 place-items-center rounded-full bg-success/15 text-success">
+        <Check size={28} strokeWidth={2.5} />
+      </div>
+      <h3 className="text-xl font-semibold">Thank you for writing to us!</h3>
+      <p className="text-sm leading-relaxed text-fg-muted">
+        We've received your message and our team will get back to you soon.
+        Meanwhile, feel free to explore the DubCall console.
+      </p>
+      <div className="flex flex-col gap-2 pt-2 sm:flex-row sm:gap-2">
+        <a
+          {...consoleLinkProps()}
+          className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-fg px-4 py-2.5 text-sm font-semibold text-bg transition-transform hover:-translate-y-0.5"
+        >
+          Explore console
+          <ExternalLink size={13} />
+        </a>
+        <button
+          onClick={onClose}
+          className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-full border border-line px-4 py-2.5 text-sm font-semibold transition-colors hover:bg-fg/5"
+        >
+          Close
+          <ArrowRight size={13} />
+        </button>
+      </div>
+    </div>
   );
 }
 

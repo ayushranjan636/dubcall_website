@@ -2,6 +2,7 @@ import { ArrowRight, BookOpen, FileText, Scale, Shield } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+import { useTalkToUs } from "@/lib/talk-to-us";
 
 const resources = [
   {
@@ -47,6 +48,7 @@ const resources = [
 ];
 
 export default function ResourcesPage() {
+  const { open: openTalkToUs } = useTalkToUs();
   return (
     <div className="min-h-screen bg-bg text-fg">
       <Navbar />
@@ -117,9 +119,9 @@ export default function ResourcesPage() {
             <p className="mt-3 text-fg-muted">
               Our support team is here to help. We respond within 24 hours.
             </p>
-            <a href="/contact" className="btn-primary mt-7 inline-flex">
+            <button onClick={openTalkToUs} className="btn-primary mt-7 inline-flex">
               Contact support <ArrowRight size={16} />
-            </a>
+            </button>
           </Reveal>
         </section>
       </main>

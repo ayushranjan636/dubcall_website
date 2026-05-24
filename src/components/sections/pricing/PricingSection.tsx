@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, ExternalLink } from "lucide-react";
 import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
+import { useTalkToUs } from "@/lib/talk-to-us";
+import { CONSOLE_URL } from "@/lib/links";
 import { cn } from "@/lib/cn";
 
 const plans = [
@@ -58,6 +60,7 @@ const plans = [
 
 export default function PricingSection() {
   const [cycle, setCycle] = useState<"monthly" | "annual">("monthly");
+  const { open: openTalkToUs } = useTalkToUs();
 
   return (
     <section className="relative isolate overflow-hidden bg-bg py-24" id="pricing">
@@ -140,25 +143,46 @@ export default function PricingSection() {
                   </li>
                 ))}
               </ul>
-              <button
-                className={cn(
-                  "mt-7 w-full rounded-full py-2.5 text-sm font-semibold transition-all",
-                  plan.popular
-                    ? "bg-fg text-bg hover:-translate-y-0.5"
-                    : "border border-line text-fg hover:bg-fg/5"
-                )}
-              >
-                {plan.cta}
-              </button>
+              {plan.custom ? (
+                <button
+                  onClick={openTalkToUs}
+                  className={cn(
+                    "mt-7 inline-flex w-full items-center justify-center gap-1.5 rounded-full py-2.5 text-sm font-semibold transition-all",
+                    plan.popular
+                      ? "bg-fg text-bg hover:-translate-y-0.5"
+                      : "border border-line text-fg hover:bg-fg/5"
+                  )}
+                >
+                  {plan.cta}
+                </button>
+              ) : (
+                <a
+                  href={CONSOLE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(
+                    "mt-7 inline-flex w-full items-center justify-center gap-1.5 rounded-full py-2.5 text-sm font-semibold transition-all",
+                    plan.popular
+                      ? "bg-fg text-bg hover:-translate-y-0.5"
+                      : "border border-line text-fg hover:bg-fg/5"
+                  )}
+                >
+                  {plan.cta} <ExternalLink size={12} />
+                </a>
+              )}
             </StaggerItem>
           ))}
         </StaggerGroup>
 
         <Reveal className="mt-12 text-center text-sm text-fg-muted">
           Need something custom?{" "}
-          <a href="/contact" className="font-semibold text-fg underline">
+          <button
+            type="button"
+            onClick={openTalkToUs}
+            className="font-semibold text-fg underline underline-offset-2 hover:text-fg"
+          >
             Contact us
-          </a>
+          </button>
         </Reveal>
       </div>
     </section>

@@ -1,8 +1,9 @@
-import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/lib/motion";
+import { useTalkToUs } from "@/lib/talk-to-us";
 
 export default function EnterpriseBanner() {
+  const { open } = useTalkToUs();
   return (
     <section className="border-t border-line bg-surface-2 py-16">
       <Reveal className="mx-auto max-w-3xl px-6 text-center">
@@ -14,9 +15,9 @@ export default function EnterpriseBanner() {
           For large-scale deployments and enterprise requirements, we offer
           fully tailored plans, dedicated support, SLAs, and white-label.
         </p>
-        <Link href="/contact" className="btn-primary mt-7 inline-flex">
+        <button onClick={open} className="btn-primary mt-7 inline-flex">
           Talk to sales <ArrowRight size={16} />
-        </Link>
+        </button>
       </Reveal>
     </section>
   );

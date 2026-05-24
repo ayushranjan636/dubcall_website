@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal } from "@/lib/motion";
+import { useTalkToUs } from "@/lib/talk-to-us";
 
 const faqs = [
   {
@@ -38,6 +39,7 @@ const faqs = [
 
 export default function PricingFAQ() {
   const [open, setOpen] = useState<number | null>(0);
+  const { open: openTalkToUs } = useTalkToUs();
 
   return (
     <section className="border-t border-line bg-bg py-24">
@@ -85,6 +87,16 @@ export default function PricingFAQ() {
             );
           })}
         </div>
+
+        <Reveal className="card mt-12 p-8 text-center">
+          <h3 className="text-xl font-semibold">Still curious about pricing?</h3>
+          <p className="mt-2 text-sm text-fg-muted">
+            Our team will craft a plan around your usage.
+          </p>
+          <button onClick={openTalkToUs} className="btn-secondary mt-5 inline-flex">
+            Talk to sales
+          </button>
+        </Reveal>
       </div>
     </section>
   );

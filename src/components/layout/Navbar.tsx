@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import { useLocation, Link } from "wouter";
 import { Menu, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import TalkToUs from "@/components/shared/TalkToUs";
 import ThemeToggle from "@/components/shared/ThemeToggle";
+import { useTalkToUs } from "@/lib/talk-to-us";
+import { consoleLinkProps } from "@/lib/links";
 import { cn } from "@/lib/cn";
 
 const NAV_LINKS = [
@@ -15,9 +16,9 @@ const NAV_LINKS = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [talkToUsOpen, setTalkToUsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [location] = useLocation();
+  const { open: openTalkToUs } = useTalkToUs();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -67,9 +68,7 @@ export default function Navbar() {
                 href={link.href}
                 className={cn(
                   "relative rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-300",
-                  isActive(link.href)
-                    ? "text-fg"
-                    : "text-fg-muted hover:text-fg"
+                  isActive(link.href) ? "text-fg" : "text-fg-muted hover:text-fg"
                 )}
               >
                 {isActive(link.href) && (
@@ -88,9 +87,7 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-2">
           <ThemeToggle />
           <a
-            href="https://console.dubcall.com/overview"
-            target="_blank"
-            rel="noopener noreferrer"
+            {...consoleLinkProps()}
             className="group inline-flex items-center gap-1.5 rounded-full border border-line bg-bg/40 px-3.5 py-1.5 text-sm font-semibold text-fg transition-all duration-300 ease-apple hover:-translate-y-0.5 hover:border-fg/30 hover:bg-fg/5"
           >
             Sign in
@@ -100,7 +97,7 @@ export default function Navbar() {
             />
           </a>
           <button
-            onClick={() => setTalkToUsOpen(true)}
+            onClick={openTalkToUs}
             className="rounded-full bg-fg px-4 py-1.5 text-sm font-semibold text-bg shadow-soft transition-transform duration-300 ease-apple hover:-translate-y-0.5 active:scale-95"
           >
             Talk to us
@@ -142,9 +139,7 @@ export default function Navbar() {
             <div className="mt-2 flex items-center gap-2 border-t border-line pt-3">
               <ThemeToggle />
               <a
-                href="https://console.dubcall.com/overview"
-                target="_blank"
-                rel="noopener noreferrer"
+                {...consoleLinkProps()}
                 className="flex flex-1 items-center justify-center gap-1.5 rounded-full border border-line px-3 py-2 text-center text-sm font-semibold transition-colors hover:bg-fg/5"
               >
                 Sign in
@@ -152,7 +147,7 @@ export default function Navbar() {
               </a>
               <button
                 onClick={() => {
-                  setTalkToUsOpen(true);
+                  openTalkToUs();
                   setMenuOpen(false);
                 }}
                 className="flex-1 rounded-full bg-fg px-3 py-2 text-sm font-semibold text-bg"
@@ -163,8 +158,6 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-
-      <TalkToUs isOpen={talkToUsOpen} onClose={() => setTalkToUsOpen(false)} />
     </header>
   );
 }
