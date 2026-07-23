@@ -51,7 +51,7 @@ export default function TrustedBy() {
             <img
               src="/images/nirmaan.png"
               alt="Nirmaan"
-              className="h-9 w-auto opacity-90 transition hover:opacity-100"
+              className="h-14 w-auto opacity-90 transition hover:opacity-100"
               loading="lazy"
             />
           </div>
