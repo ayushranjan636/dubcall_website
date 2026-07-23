@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Check, Sparkles, ExternalLink } from "lucide-react";
 import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
 import { useTalkToUs } from "@/lib/talk-to-us";
@@ -9,7 +8,7 @@ const plans = [
   {
     name: "Free",
     free: true,
-    price: { monthly: 0, annual: 0 },
+    price: 0,
     usdHint: "",
     description: "Try DubCall risk-free",
     features: [
@@ -23,7 +22,7 @@ const plans = [
   },
   {
     name: "Starter",
-    price: { monthly: 2000, annual: 1600 },
+    price: 2000,
     usdHint: "~$20",
     description: "For solo founders & SMBs",
     features: [
@@ -38,7 +37,7 @@ const plans = [
   },
   {
     name: "Pro",
-    price: { monthly: 5000, annual: 4000 },
+    price: 5000,
     usdHint: "~$49",
     description: "For growing teams running live ops",
     features: [
@@ -54,7 +53,7 @@ const plans = [
   },
   {
     name: "Scale",
-    price: { monthly: 10000, annual: 8000 },
+    price: 10000,
     usdHint: "~$99",
     description: "For teams scaling outbound ops",
     features: [
@@ -74,7 +73,6 @@ const plans = [
 const formatINR = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 export default function PricingSection() {
-  const [cycle, setCycle] = useState<"monthly" | "annual">("monthly");
   const { open: openTalkToUs } = useTalkToUs();
 
   return (
@@ -93,29 +91,9 @@ export default function PricingSection() {
             Pricing that <span className="gradient-text">scales</span> with you.
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-fg-muted">
-            Start free. Upgrade when you're ready. No hidden costs — flat
-            platform fee plus usage-based credits.
+            Start free. Upgrade only when your AI agents are taking real
+            calls. Cancel any time.
           </p>
-        </Reveal>
-
-        <Reveal className="mt-10 flex justify-center" delay={0.1}>
-          <div className="inline-flex rounded-full border border-line bg-surface p-1">
-            {(["monthly", "annual"] as const).map((c) => (
-              <button
-                key={c}
-                onClick={() => setCycle(c)}
-                className={cn(
-                  "rounded-full px-5 py-1.5 text-xs font-semibold capitalize transition-colors",
-                  cycle === c ? "bg-fg text-bg" : "text-fg-muted hover:text-fg"
-                )}
-              >
-                {c}
-                {c === "annual" && (
-                  <span className="ml-1 text-[10px] text-success">-20%</span>
-                )}
-              </button>
-            ))}
-          </div>
         </Reveal>
 
         <StaggerGroup className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
@@ -141,12 +119,10 @@ export default function PricingSection() {
                   ) : (
                     <>
                       <span className="text-4xl font-semibold tracking-tight">
-                        {formatINR(plan.price[cycle])}
+                        {formatINR(plan.price)}
                       </span>
-                      <span className="text-sm text-fg-muted">
-                        {cycle === "annual" ? "/mo billed annually" : "/mo"}
-                      </span>
-                      {plan.usdHint && cycle === "monthly" && (
+                      <span className="text-sm text-fg-muted">/mo</span>
+                      {plan.usdHint && (
                         <span className="text-xs text-fg-subtle">({plan.usdHint})</span>
                       )}
                     </>
@@ -176,7 +152,7 @@ export default function PricingSection() {
               >
                 {plan.free
                   ? plan.cta
-                  : `Subscribe — ${formatINR(plan.price[cycle])}/mo`}{" "}
+                  : `Subscribe — ${formatINR(plan.price)}/mo`}{" "}
                 <ExternalLink size={12} />
               </a>
             </StaggerItem>
