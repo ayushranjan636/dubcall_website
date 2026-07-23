@@ -1,10 +1,10 @@
 import { Reveal } from "@/lib/motion";
 
 const creditPacks = [
-  { tier: "Starter", credits: 100, price: "₹500", costPerCredit: "₹5" },
-  { tier: "Business", credits: 1000, price: "₹5,000", costPerCredit: "₹5" },
-  { tier: "Professional", credits: 3500, price: "₹17,500", costPerCredit: "₹5" },
-  { tier: "Enterprise", credits: 10000, price: "₹50,000", costPerCredit: "₹5" },
+  { tier: "Starter", credits: 100, price: "₹500", costPerCredit: "₹5.00", discount: null },
+  { tier: "Business", credits: 1000, price: "₹4,500", costPerCredit: "₹4.50", discount: "10% off" },
+  { tier: "Professional", credits: 3500, price: "₹14,000", costPerCredit: "₹4.00", discount: "20% off" },
+  { tier: "Enterprise", credits: 10000, price: "₹35,000", costPerCredit: "₹3.50", discount: "30% off" },
 ];
 
 export default function CreditPacks() {
@@ -17,7 +17,7 @@ export default function CreditPacks() {
             Pay only for what you use.
           </h2>
           <p className="mt-3 text-fg-muted">
-            Buy credits in bulk. Simple flat rate — ₹5 per credit.
+            Buy credits in bulk. Save more as you scale.
           </p>
         </Reveal>
 
@@ -36,13 +36,20 @@ export default function CreditPacks() {
               <div className="font-semibold">{p.tier}</div>
               <div className="text-fg-muted">{p.credits.toLocaleString()}</div>
               <div className="font-semibold">{p.price}</div>
-              <div className="text-xs text-fg-muted">{p.costPerCredit} /credit</div>
+              <div className="text-xs text-fg-muted">
+                {p.costPerCredit} /credit
+                {p.discount && (
+                  <span className="ml-1.5 rounded-full bg-success/15 px-2 py-0.5 text-[10px] font-semibold text-success">
+                    {p.discount}
+                  </span>
+                )}
+              </div>
             </div>
           ))}
         </Reveal>
 
         <p className="mt-6 text-center text-xs text-fg-subtle">
-          Need a larger pack? Contact sales for volume pricing.
+          Volume discounts automatically applied as you scale.
         </p>
       </div>
     </section>
