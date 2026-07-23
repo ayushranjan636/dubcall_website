@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "wouter";
 import { Mail } from "lucide-react";
-import { XIcon, LinkedInIcon, GitHubIcon } from "@/components/icons/Brand";
+import { XIcon, LinkedInIcon, GitHubIcon, InstagramIcon } from "@/components/icons/Brand";
 
 const columns = [
   {
@@ -69,11 +69,18 @@ export default function Footer() {
               {[
                 { Icon: XIcon, href: "#", label: "X" },
                 { Icon: LinkedInIcon, href: "#", label: "LinkedIn" },
+                {
+                  Icon: InstagramIcon,
+                  href: "https://www.instagram.com/_dubcall.com_/",
+                  label: "Instagram",
+                },
                 { Icon: GitHubIcon, href: "#", label: "GitHub" },
               ].map(({ Icon, href, label }) => (
                 <a
                   key={label}
                   href={href}
+                  target={href.startsWith("http") ? "_blank" : undefined}
+                  rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
                   className="grid h-9 w-9 place-items-center rounded-full border border-line text-fg-muted transition-colors hover:bg-fg hover:text-bg"
                   aria-label={label}
                 >
