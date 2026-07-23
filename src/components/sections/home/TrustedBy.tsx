@@ -37,16 +37,24 @@ export default function TrustedBy() {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col items-center gap-3">
+        <div className="mt-10 flex flex-col items-center gap-4">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-fg-subtle">
             Supported by
           </p>
-          <img
-            src="/images/cartesia-startups.png"
-            alt="Cartesia Startups"
-            className="h-6 w-auto opacity-70 transition hover:opacity-100 dark:invert"
-            loading="lazy"
-          />
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4">
+            <img
+              src="/images/cartesia-startups.png"
+              alt="Cartesia Startups"
+              className="h-6 w-auto opacity-70 transition hover:opacity-100 dark:invert"
+              loading="lazy"
+            />
+            <img
+              src="/images/nirmaan.png"
+              alt="Nirmaan"
+              className="h-9 w-auto opacity-90 transition hover:opacity-100"
+              loading="lazy"
+            />
+          </div>
         </div>
       </div>
     </section>
