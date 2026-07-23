@@ -3,67 +3,85 @@ import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
 
 const testimonials = [
   {
-    name: "Jennifer Kim",
-    role: "Marketing Manager, TechStartups Inc.",
-    avatar: "JK",
-    content: "Converting manual calls to AI used to take hours. Now it takes 20 seconds.",
-    highlight: "20 seconds",
+    name: "Rohit Khandelwal",
+    role: "Operations Lead, Rivet Global",
+    avatar: "RK",
+    stars: 5,
+    content:
+      "We moved first-line support to DubCall over a weekend. It now clears around 70% of tickets before a human touches them — setup was mostly pasting in our FAQ.",
+    highlight: "clears around 70% of tickets",
   },
   {
-    name: "Carlos Rivera",
-    role: "Marketing Director, GrandFirst",
-    avatar: "CR",
-    content: "Brand-consistent conversations across every campaign — effortless for our team.",
-    highlight: "every campaign",
+    name: "Sneha Iyer",
+    role: "Founder's Office, SlateMate",
+    avatar: "SI",
+    stars: 5,
+    content:
+      "Parents call at odd hours. The agent picks up at 11 pm, switches between Hindi and English, books the counsellor slot and sends a WhatsApp recap. That used to be my job.",
+    highlight: "switches between Hindi and English",
   },
   {
-    name: "Mike Johnson",
-    role: "Owner, PrintPerfect",
-    avatar: "MJ",
-    content: "Perfect call quality every time — from leads to closings.",
-    highlight: "from leads to closings",
+    name: "Aman Verma",
+    role: "Growth Head, Franchise Batao",
+    avatar: "AV",
+    stars: 5,
+    content:
+      "We qualify 400+ franchise leads a month. DubCall calls back within a minute of form-fill — our connect rate went from 31% to 58% in six weeks.",
+    highlight: "connect rate went from 31% to 58%",
   },
   {
-    name: "David Chen",
-    role: "Ops Manager, ScaleUp",
-    avatar: "DC",
-    content: "Our support team needed AI assist for high volume. DubCall solved it completely.",
-    highlight: "solved it completely",
+    name: "Priya Nair",
+    role: "Customer Experience, The HNH",
+    avatar: "PN",
+    stars: 5,
+    content:
+      "Honestly, I expected another robotic IVR. In the first week it handled a refund escalation more calmly than our trainee did.",
+    highlight: "handled a refund escalation",
   },
   {
-    name: "Tom Williams",
-    role: "VP Sales, GlobalTech",
-    avatar: "TW",
-    content: "Enterprise calling requires perfect agents — DubCall delivers every time.",
-    highlight: "every time",
+    name: "Karthik Reddy",
+    role: "Sales Director, PropVista Realty",
+    avatar: "KR",
+    stars: 5,
+    content:
+      "Site-visit reminders and follow-ups run on autopilot now. Saturday no-shows dropped by roughly a third in the first month.",
+    highlight: "no-shows dropped by roughly a third",
   },
   {
-    name: "Lisa Rodriguez",
-    role: "Brand Manager, Fashion Forward",
-    avatar: "LR",
-    content: "Clean, professional results that work beautifully — outbound is sorted.",
-    highlight: "beautifully",
+    name: "Dr. Neha Kulkarni",
+    role: "Director, Sparsh Dental Clinics",
+    avatar: "NK",
+    stars: 4,
+    content:
+      "Rescheduling calls used to eat up our front desk's mornings — the agent handles them and syncs the calendar. Took us two tries to get the script right, but their team helped on a call.",
+    highlight: "handles them and syncs the calendar",
   },
   {
-    name: "Rachel Green",
-    role: "Product Designer, StartupX",
-    avatar: "RG",
-    content: "From concept to live demo in seconds, not hours.",
-    highlight: "seconds, not hours",
+    name: "Arjun Mehta",
+    role: "Co-founder, Vayu Botanicals",
+    avatar: "AM",
+    stars: 5,
+    content:
+      "COD confirmation at scale — it called nearly 2,000 orders during our Diwali sale and RTO came down about 18%. Paid for itself in one campaign.",
+    highlight: "RTO came down about 18%",
   },
   {
-    name: "Amanda Thompson",
-    role: "Customer Success, ServiceFirst",
-    avatar: "AT",
-    content: "Maintains service quality while handling every kind of inquiry.",
-    highlight: "every kind of inquiry",
+    name: "Sana Shaikh",
+    role: "Support Manager, Kredil Finserv",
+    avatar: "SS",
+    stars: 4,
+    content:
+      "Voice quality in Hinglish is genuinely good and customers rarely notice it's AI. The analytics dashboard could go deeper — though two of my feature requests shipped within a month.",
+    highlight: "customers rarely notice it's AI",
   },
   {
-    name: "Maria Gonzalez",
-    role: "Owner, Custom Apparel Co",
-    avatar: "MG",
-    content: "Saves our team 10+ hours per week — essential for any growing business.",
-    highlight: "10+ hours per week",
+    name: "Vivek Joshi",
+    role: "Director, Northline BPO Services",
+    avatar: "VJ",
+    stars: 5,
+    content:
+      "Our scripts were a mess when we started — their team basically rewrote them with us. Clients now think we run a night shift. We don't.",
+    highlight: "Clients now think we run a night shift",
   },
 ];
 
@@ -97,9 +115,15 @@ export default function Testimonials() {
                     key={t.name}
                     className="card flex flex-col gap-4 p-6 transition-transform duration-500 ease-apple hover:-translate-y-1"
                   >
-                    <div className="flex gap-0.5 text-warning">
+                    <div className="flex gap-0.5">
                       {Array.from({ length: 5 }).map((_, i) => (
-                        <Star key={i} size={12} fill="currentColor" strokeWidth={0} />
+                        <Star
+                          key={i}
+                          size={12}
+                          fill="currentColor"
+                          strokeWidth={0}
+                          className={i < t.stars ? "text-warning" : "text-line"}
+                        />
                       ))}
                     </div>
                     <p className="text-sm leading-relaxed text-fg-muted">
