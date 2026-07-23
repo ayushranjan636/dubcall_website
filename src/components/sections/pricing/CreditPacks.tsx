@@ -1,10 +1,10 @@
 import { Reveal } from "@/lib/motion";
 
 const creditPacks = [
-  { tier: "Starter", credits: 100, price: "$999", costPerCredit: "$9.99" },
-  { tier: "Business", credits: 1000, price: "$7,999", costPerCredit: "$7.99" },
-  { tier: "Professional", credits: 3500, price: "$24,999", costPerCredit: "$7.14" },
-  { tier: "Enterprise", credits: 10000, price: "$79,999", costPerCredit: "$7.00" },
+  { tier: "Starter", credits: 100, price: "₹500", costPerCredit: "₹5" },
+  { tier: "Business", credits: 1000, price: "₹5,000", costPerCredit: "₹5" },
+  { tier: "Professional", credits: 3500, price: "₹17,500", costPerCredit: "₹5" },
+  { tier: "Enterprise", credits: 10000, price: "₹50,000", costPerCredit: "₹5" },
 ];
 
 export default function CreditPacks() {
@@ -17,7 +17,7 @@ export default function CreditPacks() {
             Pay only for what you use.
           </h2>
           <p className="mt-3 text-fg-muted">
-            Buy credits in bulk. Save more as you scale.
+            Buy credits in bulk. Simple flat rate — ₹5 per credit.
           </p>
         </Reveal>
 
@@ -36,13 +36,13 @@ export default function CreditPacks() {
               <div className="font-semibold">{p.tier}</div>
               <div className="text-fg-muted">{p.credits.toLocaleString()}</div>
               <div className="font-semibold">{p.price}</div>
-              <div className="text-xs text-fg-muted">{p.costPerCredit} /min</div>
+              <div className="text-xs text-fg-muted">{p.costPerCredit} /credit</div>
             </div>
           ))}
         </Reveal>
 
         <p className="mt-6 text-center text-xs text-fg-subtle">
-          Volume discounts automatically applied as you scale.
+          Need a larger pack? Contact sales for volume pricing.
         </p>
       </div>
     </section>
