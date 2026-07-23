@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link } from "wouter";
 import { Mail } from "lucide-react";
 import { XIcon, LinkedInIcon, GitHubIcon, InstagramIcon } from "@/components/icons/Brand";
+import { useTalkToUs } from "@/lib/talk-to-us";
 
 const columns = [
   {
@@ -28,7 +29,7 @@ const columns = [
       { label: "About", href: "/company" },
       { label: "Contact", href: "/contact" },
       { label: "Careers", href: "/contact" },
-      { label: "Support", href: "mailto:support@dubcall.com" },
+      { label: "Support", href: "talk-to-us" },
     ],
   },
 ];
@@ -36,6 +37,7 @@ const columns = [
 export default function Footer() {
   const [email, setEmail] = useState("");
   const [subscribed, setSubscribed] = useState(false);
+  const { open: openTalkToUs } = useTalkToUs();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -102,12 +104,22 @@ export default function Footer() {
               <ul className="space-y-2.5">
                 {col.links.map((link) => (
                   <li key={link.label}>
-                    <a
-                      href={link.href}
-                      className="text-sm text-fg-muted transition-colors hover:text-fg"
-                    >
-                      {link.label}
-                    </a>
+                    {link.href === "talk-to-us" ? (
+                      <button
+                        type="button"
+                        onClick={openTalkToUs}
+                        className="text-sm text-fg-muted transition-colors hover:text-fg"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <a
+                        href={link.href}
+                        className="text-sm text-fg-muted transition-colors hover:text-fg"
+                      >
+                        {link.label}
+                      </a>
+                    )}
                   </li>
                 ))}
               </ul>
