@@ -68,7 +68,11 @@ export default function Footer() {
             <div className="mt-5 flex items-center gap-2">
               {[
                 { Icon: XIcon, href: "#", label: "X" },
-                { Icon: LinkedInIcon, href: "#", label: "LinkedIn" },
+                {
+                  Icon: LinkedInIcon,
+                  href: "https://www.linkedin.com/company/dubcall",
+                  label: "LinkedIn",
+                },
                 {
                   Icon: InstagramIcon,
                   href: "https://www.instagram.com/_dubcall.com_/",
