@@ -1,0 +1,8 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "wXH7Sttf8wdHX7rVgXa4a"
+uri = "file://.local/geo-report-dubcall.pdf"
+type = "pdf"
+title = "DubCall — Complete GEO Report (July 2026)"

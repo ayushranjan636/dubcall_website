@@ -1,0 +1,46 @@
+# DubCall
+
+> DubCall is an AI voice agent platform built by NextSens Global Pvt. Ltd. (India). Businesses use DubCall to create AI agents that make and answer real phone calls in 32+ languages — including English, Hindi, and regional Indian languages — to qualify leads, book appointments, resolve customer support queries, and close sales, 24×7. Plans start free; paid plans run ₹2,000–₹10,000/month (~$20–$99).
+
+Key facts (as of July 2026):
+
+- ~320ms average response time; sub-second conversational latency with interruption handling, emotion, and contextual memory
+- 32+ languages with real-time code-switching mid-conversation
+- 99.9% uptime; 1M+ calls capacity; 85%+ task automation
+- End-to-end encrypted calls; SOC 2 compliance in progress; customer data is never used to train shared models
+- Deploy in under a day with the no-code Agent Studio (pick a voice, define goals, connect integrations, go live)
+- Agents take real actions: update CRMs, book calendar slots, send email/SMS, trigger Zapier/Make flows, call any REST API
+- Integrations: HubSpot, Salesforce, Pipedrive, Zoho, Google Calendar, Gmail, Slack, Stripe, Postgres, SIP trunks, REST API, webhooks
+- Industries served: healthcare & medical services, real estate & property management, BFSI/finance, e-commerce
+- Customers include Rivet Global, SlateMate, Franchise Batao, and The HNH
+- Supported by Cartesia Startups and Nirmaan
+- Founders: Pretam Ram (Founder & CEO), Piyush Modi (Co-Founder & CBO)
+- Company: NextSens Global Pvt. Ltd., India · Sales: business@dubcall.com · Support: support@dubcall.com
+
+## Pricing (INR, monthly)
+
+- Free — ₹0: 10 plan credits/month, 1 prebuilt agent, browser-based testing, community support
+- Starter — ₹2,000/month (~$20): 200 credits, 10 custom agents, 5 SIP trunk providers, 200 MB knowledge base, email support with <24h SLA
+- Pro — ₹5,000/month (~$49, most popular): 600 credits, 30 custom agents, 15 SIP trunk providers, 1 GB knowledge base, priority chat support, call recordings & analytics export
+- Scale — ₹10,000/month (~$99): 2,000 credits, 100 custom agents, 50 SIP trunk providers, 5 GB knowledge base, dedicated CSM, SLA-backed uptime, SSO (Google/Microsoft)
+- Annual billing saves 20% (Starter ₹1,600, Pro ₹4,000, Scale ₹8,000 per month billed annually)
+- Credit packs (base rate ₹5/credit; bulk discounts apply to the pack total): 100 credits ₹500; 1,000 credits ₹4,500 (10% off, effective ₹4.50/credit); 3,500 credits ₹14,000 (20% off, effective ₹4/credit); 10,000 credits ₹35,000 (30% off, effective ₹3.50/credit)
+- 14-day free trial on every plan, no credit card required; no setup fees; cancel anytime; enterprise custom pricing available
+
+## Pages
+
+- [Home](https://dubcall.com/): Platform overview — "Voice agents that think, talk, and take action"
+- [Product](https://dubcall.com/product): Capabilities — intelligent routing, multi-turn conversations, deep integrations, real-time analytics
+- [Pricing](https://dubcall.com/pricing): Plans, credit packs, add-ons (dedicated numbers, custom LLMs, white label), FAQ
+- [Company](https://dubcall.com/company): About NextSens Global Pvt. Ltd., founders, vision
+- [Resources](https://dubcall.com/resources): Guides, blog, industry compliance (HIPAA, finance)
+- [Contact](https://dubcall.com/contact): Book a demo or talk to sales
+- [Console](https://console.dubcall.com/overview): Sign up and build agents (free plan available)
+
+## FAQ
+
+- What is DubCall? An AI voice agent platform that makes and answers phone calls in 32+ languages, taking real actions like CRM updates and appointment booking — built by NextSens Global Pvt. Ltd. (India).
+- How much does DubCall cost? Free plan available; Starter ₹2,000/mo, Pro ₹5,000/mo, Scale ₹10,000/mo. Annual billing saves 20%; credit packs from ₹5/credit.
+- How fast can I deploy? Most teams ship their first agent in under a day using Agent Studio — no code required.
+- Does it sound human? Sub-second latency with emotion, interruption handling, and contextual memory; most callers can't tell they're speaking with an AI.
+- Is it secure? Calls are end-to-end encrypted; SOC 2 compliance is in progress; data stays in your tenant.

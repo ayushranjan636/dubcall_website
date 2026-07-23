@@ -1,0 +1,427 @@
+Master GEO + AI Search Optimization Prompt for DubCall
+
+You are a world-class GEO (Generative Engine Optimization), SEO, AI Search, LLM Optimization, Brand Positioning, and Content Strategy expert.
+
+Your mission is to perform a complete GEO optimization for DubCall, an AI Voice Agent platform, so that it becomes highly discoverable, highly cited, and frequently recommended by AI assistants like ChatGPT, Gemini, Claude, Perplexity, Copilot, Grok, and future LLM-powered search engines.
+
+Base your analysis primarily on the provided DubCall business strategy and pitch materials. Do not invent unsupported company facts. Clearly distinguish recommendations from information already documented in the materials.
+
+Objective
+
+Create a complete GEO strategy that helps DubCall become:
+
+Recommended by ChatGPT
+Recommended by Gemini
+Recommended by Claude
+Recommended by Perplexity
+Recommended by Microsoft Copilot
+Recommended by Grok
+Recommended by AI Search Engines
+Recommended in voice search
+Ranked on Google AI Overviews
+Ranked on Bing AI
+Ranked on Perplexity citations
+Ranked in future AI-native search engines
+
+Think beyond traditional SEO.
+
+Optimize for LLM retrieval, citations, semantic understanding, trust, authority, knowledge graphs, and AI answer generation.
+
+About DubCall
+
+Analyze DubCall deeply using the provided documents.
+
+Understand:
+
+Product
+Features
+Technology
+AI architecture
+ICP
+Business model
+Pricing
+Industries
+Competitors
+Value proposition
+Positioning
+Messaging
+Market
+GTM
+Vision
+Team
+Brand identity
+Use cases
+Customer journey
+
+Extract every meaningful entity, relationship, capability, and positioning statement supported by the source material.
+
+Deliver a Complete GEO Report
+1. Brand Understanding
+
+Analyze
+
+What DubCall is
+What problem it solves
+Why customers buy it
+Why AI should recommend it
+Core positioning
+Competitive positioning
+Market category
+Business category
+Semantic identity
+2. GEO Audit
+
+Evaluate
+
+AI discoverability
+AI readability
+Entity strength
+Semantic clarity
+EEAT
+Topical authority
+Citation probability
+Knowledge graph readiness
+LLM friendliness
+
+Score everything from 1–10.
+
+3. Entity Mapping
+
+Create a complete entity graph.
+
+Include
+
+Company
+Founders
+Product
+Features
+Industries
+Customer types
+Technologies
+Integrations
+Competitors
+Pricing
+AI Voice Agents
+Voice AI
+Conversational AI
+Call automation
+Customer support
+Lead qualification
+Appointment booking
+CRM
+WhatsApp
+SIP
+APIs
+Multilingual AI
+India
+SME
+Enterprise
+Automation
+
+Show relationships between every entity.
+
+4. Semantic Keyword Research
+
+Generate
+
+Primary keywords
+Secondary keywords
+Long-tail keywords
+Conversational keywords
+Voice-search keywords
+AI prompt keywords
+GEO keywords
+LLM retrieval phrases
+Question keywords
+Intent clusters
+
+Minimum:
+
+500 keywords
+
+Group by
+
+Awareness
+Consideration
+Purchase
+Support
+Technical
+Enterprise
+SMB
+Local
+AI Search
+5. AI Search Queries
+
+Generate 500+ natural questions users might ask AI.
+
+Examples
+
+Best AI voice agent
+Best AI phone calling software
+AI receptionist
+AI sales caller
+Voice AI for healthcare
+AI customer support
+AI phone bot
+Call center automation
+AI outbound calling
+AI appointment booking
+
+Then explain exactly how DubCall should appear as the answer.
+
+6. AI Citation Strategy
+
+Explain how DubCall can become cited by
+
+ChatGPT
+Gemini
+Claude
+Perplexity
+Copilot
+Grok
+
+Recommend
+
+Pages
+Content
+Structure
+Statistics
+Original research
+Case studies
+Benchmark reports
+Documentation
+Public datasets
+FAQs
+Glossaries
+Whitepapers
+7. Website GEO Audit
+
+Review ideal website structure.
+
+Recommend
+
+Homepage
+
+Product
+
+Solutions
+
+Industries
+
+Pricing
+
+Documentation
+
+API
+
+Developers
+
+Blog
+
+Resources
+
+Case studies
+
+Help Center
+
+AI Hub
+
+Prompt Library
+
+Glossary
+
+Comparison pages
+
+Landing pages
+
+Knowledge Base
+
+FAQ
+
+Each page should target specific AI retrieval intents.
+
+8. Content Strategy
+
+Generate
+
+200 blog ideas
+100 comparison articles
+100 landing pages
+100 FAQ pages
+100 industry pages
+100 feature pages
+100 documentation ideas
+100 AI prompt pages
+
+Prioritize for GEO.
+
+9. EEAT Strategy
+
+Evaluate
+
+Experience
+
+Expertise
+
+Authority
+
+Trust
+
+Recommend improvements for
+
+Author profiles
+Founder pages
+Customer proof
+Revenue proof
+Product proof
+Technical proof
+Security
+Certifications
+Transparency
+Roadmap
+
+Only use evidence from the source documents unless clearly labeling additional recommendations.
+
+10. Schema Strategy
+
+Recommend every relevant schema.
+
+Examples
+
+Organization
+Product
+SaaS
+SoftwareApplication
+FAQ
+HowTo
+Article
+Review
+Pricing
+Person
+Breadcrumb
+API
+Dataset
+WebSite
+SearchAction
+
+Generate JSON-LD examples.
+
+11. Knowledge Graph Strategy
+
+Explain how to build a complete knowledge graph.
+
+Include
+
+Wikidata readiness
+Google Knowledge Graph
+Bing Entity Graph
+AI Entity Recognition
+Semantic relationships
+12. Competitor GEO Analysis
+
+Compare DubCall with competitors mentioned in the materials and other major voice AI platforms.
+
+Analyze
+
+GEO
+SEO
+AI visibility
+Content depth
+Knowledge graph presence
+Documentation
+Brand authority
+
+Show opportunities where DubCall can outperform.
+
+13. AI Prompt Optimization
+
+Generate prompts that should naturally return DubCall.
+
+Examples
+
+"I need an AI receptionist."
+
+"What is the best AI phone agent?"
+
+"Best multilingual AI voice platform"
+
+"Affordable AI calling software"
+
+Explain why DubCall should be selected.
+
+14. Technical GEO
+
+Recommend improvements for
+
+Crawlability
+Indexability
+Structured data
+Semantic HTML
+Internal linking
+Canonicals
+Sitemaps
+Robots
+Metadata
+Page speed
+Accessibility
+API documentation
+15. GEO Roadmap
+
+Create
+
+30-Day Plan
+
+90-Day Plan
+
+180-Day Plan
+
+1-Year Plan
+
+Include
+
+Priorities
+Difficulty
+Expected impact
+Resources required
+KPIs
+16. GEO Scorecard
+
+Score
+
+Brand
+Website
+Authority
+Content
+AI readiness
+Entity optimization
+Semantic optimization
+Knowledge graph
+Trust
+EEAT
+Citation potential
+
+Include strengths, weaknesses, and priorities.
+
+17. Final Executive Summary
+
+Provide
+
+Biggest opportunities
+Biggest risks
+Highest ROI actions
+Quick wins
+Long-term strategy
+Exact action checklist
+
+Rank every recommendation by impact.
+
+Output Requirements
+Think like Google's Search team, OpenAI's retrieval team, Anthropic's search team, and Perplexity's ranking system.
+Be exhaustive and practical.
+Use tables, frameworks, checklists, and diagrams where helpful.
+Prioritize actionable recommendations over generic advice.
+Clearly distinguish:
+Source-derived facts
+Strategic recommendations
+Reasoned inferences
+Optimize specifically for AI-native search and retrieval systems, not just traditional SEO.

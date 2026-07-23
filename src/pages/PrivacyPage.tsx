@@ -1,5 +1,6 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Seo from "@/lib/seo";
 import { Reveal } from "@/lib/motion";
 
 const sections = [
@@ -46,6 +47,11 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-bg text-fg">
+      <Seo
+        title="Privacy Policy | DubCall"
+        description="How DubCall (NextSens Global Pvt. Ltd.) collects, uses, and protects your data — including call recordings, voice processing partners, and your data rights."
+        path="/privacy"
+      />
       <Navbar />
       <main className="pt-32 pb-24">
         <div className="mx-auto max-w-3xl px-6">

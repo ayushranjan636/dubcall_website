@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Reveal } from "@/lib/motion";
 import { useTalkToUs } from "@/lib/talk-to-us";
 
-const faqs = [
+export const productFaqs = [
+  {
+    question: "What is DubCall?",
+    answer:
+      "DubCall is an AI voice agent platform by NextSens Global Pvt. Ltd. that makes and answers phone calls in 32+ languages, including English, Hindi, and regional Indian languages. Agents qualify leads, book appointments, resolve support queries, and take real actions in your CRM — with ~320ms average response time and 99.9% uptime.",
+  },
   {
     question: "How fast can I deploy a voice agent?",
     answer:
@@ -55,7 +60,7 @@ export default function ProductFAQ() {
         </Reveal>
 
         <div className="mt-12 space-y-3">
-          {faqs.map((faq, i) => {
+          {productFaqs.map((faq, i) => {
             const isOpen = open === i;
             return (
               <div
@@ -71,21 +76,18 @@ export default function ProductFAQ() {
                     {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                   </span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="border-t border-line px-6 py-4 text-sm leading-relaxed text-fg-muted">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Always mounted (animated open/closed) so FAQ text is crawlable and matches FAQPage JSON-LD */}
+                <motion.div
+                  initial={false}
+                  animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="overflow-hidden"
+                  aria-hidden={!isOpen}
+                >
+                  <p className="border-t border-line px-6 py-4 text-sm leading-relaxed text-fg-muted">
+                    {faq.answer}
+                  </p>
+                </motion.div>
               </div>
             );
           })}

@@ -1,6 +1,7 @@
 import { ArrowRight, BookOpen, FileText, Scale, Shield } from "lucide-react";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Seo from "@/lib/seo";
 import { Reveal, StaggerGroup, StaggerItem } from "@/lib/motion";
 import { useTalkToUs } from "@/lib/talk-to-us";
 
@@ -51,6 +52,11 @@ export default function ResourcesPage() {
   const { open: openTalkToUs } = useTalkToUs();
   return (
     <div className="min-h-screen bg-bg text-fg">
+      <Seo
+        title="Voice AI Resources — Guides, Blog & Compliance | DubCall"
+        description="Guides, blog posts, and compliance resources for deploying AI voice agents — getting-started tutorials, CRM integration guides, and industry policies for healthcare and finance."
+        path="/resources"
+      />
       <Navbar />
       <main className="pt-24">
         <section className="relative overflow-hidden py-24">

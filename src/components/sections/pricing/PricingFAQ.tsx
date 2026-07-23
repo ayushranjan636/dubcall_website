@@ -1,10 +1,15 @@
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { Reveal } from "@/lib/motion";
 import { useTalkToUs } from "@/lib/talk-to-us";
 
-const faqs = [
+export const pricingFaqs = [
+  {
+    question: "How much does DubCall cost?",
+    answer:
+      "DubCall has a Free plan (10 credits/month) to try the platform. Paid plans are Starter at ₹2,000/month (~$20), Pro at ₹5,000/month (~$49), and Scale at ₹10,000/month (~$99). Annual billing saves 20%. Extra credits start at a ₹5/credit base rate, with discounts of up to 30% on larger packs.",
+  },
   {
     question: "Can I start with a free trial?",
     answer:
@@ -52,7 +57,7 @@ export default function PricingFAQ() {
         </Reveal>
 
         <div className="mt-12 space-y-3">
-          {faqs.map((faq, i) => {
+          {pricingFaqs.map((faq, i) => {
             const isOpen = open === i;
             return (
               <div
@@ -68,21 +73,18 @@ export default function PricingFAQ() {
                     {isOpen ? <Minus size={14} /> : <Plus size={14} />}
                   </span>
                 </button>
-                <AnimatePresence initial={false}>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                      className="overflow-hidden"
-                    >
-                      <p className="border-t border-line px-6 py-4 text-sm leading-relaxed text-fg-muted">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                {/* Always mounted (animated open/closed) so FAQ text is crawlable and matches FAQPage JSON-LD */}
+                <motion.div
+                  initial={false}
+                  animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+                  transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                  className="overflow-hidden"
+                  aria-hidden={!isOpen}
+                >
+                  <p className="border-t border-line px-6 py-4 text-sm leading-relaxed text-fg-muted">
+                    {faq.answer}
+                  </p>
+                </motion.div>
               </div>
             );
           })}
