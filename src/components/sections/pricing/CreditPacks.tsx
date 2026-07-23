@@ -1,10 +1,10 @@
 import { Reveal } from "@/lib/motion";
 
 const creditPacks = [
-  { tier: "Starter", credits: 100, price: "₹500", costPerCredit: "₹5.00", discount: null },
-  { tier: "Business", credits: 1000, price: "₹4,500", costPerCredit: "₹4.50", discount: "10% off" },
-  { tier: "Professional", credits: 3500, price: "₹14,000", costPerCredit: "₹4.00", discount: "20% off" },
-  { tier: "Enterprise", credits: 10000, price: "₹35,000", costPerCredit: "₹3.50", discount: "30% off" },
+  { tier: "Starter", credits: 100, price: "₹500", originalPrice: null, costPerCredit: "₹5", discount: null },
+  { tier: "Business", credits: 1000, price: "₹4,500", originalPrice: "₹5,000", costPerCredit: "₹5", discount: "10% off" },
+  { tier: "Professional", credits: 3500, price: "₹14,000", originalPrice: "₹17,500", costPerCredit: "₹5", discount: "20% off" },
+  { tier: "Enterprise", credits: 10000, price: "₹35,000", originalPrice: "₹50,000", costPerCredit: "₹5", discount: "30% off" },
 ];
 
 export default function CreditPacks() {
@@ -35,15 +35,20 @@ export default function CreditPacks() {
             >
               <div className="font-semibold">{p.tier}</div>
               <div className="text-fg-muted">{p.credits.toLocaleString()}</div>
-              <div className="font-semibold">{p.price}</div>
-              <div className="text-xs text-fg-muted">
-                {p.costPerCredit} /credit
+              <div className="flex flex-wrap items-center gap-1.5 font-semibold">
+                {p.originalPrice && (
+                  <span className="text-xs font-normal text-fg-subtle line-through">
+                    {p.originalPrice}
+                  </span>
+                )}
+                <span>{p.price}</span>
                 {p.discount && (
-                  <span className="ml-1.5 rounded-full bg-success/15 px-2 py-0.5 text-[10px] font-semibold text-success">
+                  <span className="rounded-full bg-success/15 px-2 py-0.5 text-[10px] font-semibold text-success">
                     {p.discount}
                   </span>
                 )}
               </div>
+              <div className="text-xs text-fg-muted">{p.costPerCredit} /credit</div>
             </div>
           ))}
         </Reveal>
