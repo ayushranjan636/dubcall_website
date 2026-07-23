@@ -36,6 +36,18 @@ export default function TrustedBy() {
             ))}
           </div>
         </div>
+
+        <div className="mt-10 flex flex-col items-center gap-3">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-fg-subtle">
+            Supported by
+          </p>
+          <img
+            src="/images/cartesia-startups.png"
+            alt="Cartesia Startups"
+            className="h-6 w-auto opacity-70 transition hover:opacity-100 dark:invert"
+            loading="lazy"
+          />
+        </div>
       </div>
     </section>
   );
