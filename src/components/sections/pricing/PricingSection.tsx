@@ -7,56 +7,71 @@ import { cn } from "@/lib/cn";
 
 const plans = [
   {
-    name: "Starter",
-    price: { monthly: 99, annual: 79 },
-    description: "Perfect for small businesses getting started",
+    name: "Free",
+    free: true,
+    price: { monthly: 0, annual: 0 },
+    usdHint: "",
+    description: "Try DubCall risk-free",
     features: [
-      "1,000 minutes / month",
-      "5 voice agents",
-      "Basic integrations",
-      "Email support",
-      "Call analytics",
-      "Multi-language support",
+      "10 plan credits per month",
+      "1 prebuilt agent",
+      "Browser-based testing only",
+      "Community support",
     ],
     popular: false,
-    cta: "Start free trial",
+    cta: "Start free",
   },
   {
-    name: "Professional",
-    price: { monthly: 299, annual: 239 },
-    description: "Best for growing teams and businesses",
+    name: "Starter",
+    price: { monthly: 2000, annual: 1600 },
+    usdHint: "~$20",
+    description: "For solo founders & SMBs",
     features: [
-      "5,000 minutes / month",
-      "20 voice agents",
-      "Advanced integrations",
-      "Priority support",
-      "Advanced analytics",
-      "Custom voice training",
-      "API access",
-      "Team collaboration",
+      "200 plan credits per month",
+      "10 custom agents",
+      "5 SIP trunk providers",
+      "Knowledge base 200 MB",
+      "Email support, < 24 h SLA",
+    ],
+    popular: false,
+    cta: "Subscribe",
+  },
+  {
+    name: "Pro",
+    price: { monthly: 5000, annual: 4000 },
+    usdHint: "~$49",
+    description: "For growing teams running live ops",
+    features: [
+      "600 plan credits per month",
+      "30 custom agents",
+      "15 SIP trunk providers",
+      "Knowledge base 1 GB",
+      "Priority chat support",
+      "Call recordings & analytics export",
     ],
     popular: true,
-    cta: "Start free trial",
+    cta: "Subscribe",
   },
   {
-    name: "Enterprise",
-    price: { monthly: 0, annual: 0 },
-    custom: true,
-    description: "For large-scale operations",
+    name: "Scale",
+    price: { monthly: 10000, annual: 8000 },
+    usdHint: "~$99",
+    description: "For teams scaling outbound ops",
     features: [
-      "Unlimited minutes",
-      "Unlimited agents",
-      "Custom integrations",
-      "24/7 dedicated support",
-      "White-label options",
-      "SLA guarantee",
-      "Custom deployment",
-      "Account manager",
+      "2000 plan credits per month",
+      "100 custom agents",
+      "50 SIP trunk providers",
+      "Knowledge base 5 GB",
+      "Dedicated CSM",
+      "SLA-backed uptime",
+      "SSO (Google / Microsoft)",
     ],
     popular: false,
-    cta: "Contact sales",
+    cta: "Subscribe",
   },
 ];
+
+const formatINR = (n: number) => `₹${n.toLocaleString("en-IN")}`;
 
 export default function PricingSection() {
   const [cycle, setCycle] = useState<"monthly" | "annual">("monthly");
@@ -103,7 +118,7 @@ export default function PricingSection() {
           </div>
         </Reveal>
 
-        <StaggerGroup className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-3">
+        <StaggerGroup className="mx-auto mt-12 grid max-w-6xl gap-5 md:grid-cols-2 lg:grid-cols-4">
           {plans.map((plan) => (
             <StaggerItem
               key={plan.name}
@@ -121,14 +136,19 @@ export default function PricingSection() {
                 <h3 className="text-xl font-semibold">{plan.name}</h3>
                 <p className="mt-1.5 text-xs text-fg-muted">{plan.description}</p>
                 <div className="mt-6 flex items-baseline justify-center gap-1">
-                  {plan.custom ? (
-                    <span className="text-4xl font-semibold tracking-tight">Custom</span>
+                  {plan.free ? (
+                    <span className="text-4xl font-semibold tracking-tight">Free</span>
                   ) : (
                     <>
                       <span className="text-4xl font-semibold tracking-tight">
-                        ${plan.price[cycle]}
+                        {formatINR(plan.price[cycle])}
                       </span>
-                      <span className="text-sm text-fg-muted">/month</span>
+                      <span className="text-sm text-fg-muted">
+                        {cycle === "annual" ? "/mo billed annually" : "/mo"}
+                      </span>
+                      {plan.usdHint && cycle === "monthly" && (
+                        <span className="text-xs text-fg-subtle">({plan.usdHint})</span>
+                      )}
                     </>
                   )}
                 </div>
@@ -143,33 +163,22 @@ export default function PricingSection() {
                   </li>
                 ))}
               </ul>
-              {plan.custom ? (
-                <button
-                  onClick={openTalkToUs}
-                  className={cn(
-                    "mt-7 inline-flex w-full items-center justify-center gap-1.5 rounded-full py-2.5 text-sm font-semibold transition-all",
-                    plan.popular
-                      ? "bg-fg text-bg hover:-translate-y-0.5"
-                      : "border border-line text-fg hover:bg-fg/5"
-                  )}
-                >
-                  {plan.cta}
-                </button>
-              ) : (
-                <a
-                  href={CONSOLE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={cn(
-                    "mt-7 inline-flex w-full items-center justify-center gap-1.5 rounded-full py-2.5 text-sm font-semibold transition-all",
-                    plan.popular
-                      ? "bg-fg text-bg hover:-translate-y-0.5"
-                      : "border border-line text-fg hover:bg-fg/5"
-                  )}
-                >
-                  {plan.cta} <ExternalLink size={12} />
-                </a>
-              )}
+              <a
+                href={CONSOLE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  "mt-7 inline-flex w-full items-center justify-center gap-1.5 rounded-full py-2.5 text-sm font-semibold transition-all",
+                  plan.popular
+                    ? "bg-fg text-bg hover:-translate-y-0.5"
+                    : "border border-line text-fg hover:bg-fg/5"
+                )}
+              >
+                {plan.free
+                  ? plan.cta
+                  : `Subscribe — ${formatINR(plan.price[cycle])}/mo`}{" "}
+                <ExternalLink size={12} />
+              </a>
             </StaggerItem>
           ))}
         </StaggerGroup>
